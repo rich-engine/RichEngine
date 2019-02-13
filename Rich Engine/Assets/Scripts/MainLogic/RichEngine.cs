@@ -18,4 +18,16 @@ public class RichEngine : MonoBehaviour {
 
 
 
+    //engine 实体
+
+
+
+
+    void Update()
+    {
+        
+    }
+
+
+
 }
