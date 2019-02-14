@@ -6,7 +6,8 @@ using System;
 
 public interface ILotteryRule
 {
-    void Compare(RichDataEntry data);   //对比是否获奖
+    string GetLotteryType();    //彩票类型
+    void Compare(RichDataEntry data );   //对比是否获奖
 
     RichDataEntry GetNextIssue(RichDataEntry data);  //获得下一期数据  
 }
@@ -21,7 +22,7 @@ public class LotteryRuleFactory  {
         ms_LotteryRuleMap = new Dictionary<string, ILotteryRule>();
     }
 
-    public static void RegistFunc(string lotteryType, ILotteryRule rule)
+    public static void Regist(string lotteryType, ILotteryRule rule)
     {
         ms_LotteryRuleMap.Add(lotteryType, rule);
     }
