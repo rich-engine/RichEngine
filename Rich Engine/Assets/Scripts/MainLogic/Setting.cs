@@ -9,7 +9,14 @@ public class Setting : MonoBehaviour {
 
     public string VERSION;  //APP 版本
 
-    public string DataSavePath; //数据保存路径
+    public string DataSaveFileName; //数据保存路径
+
+
+
+
+
+    //查询网址
+    public string url_xxx;
 
 
 }
