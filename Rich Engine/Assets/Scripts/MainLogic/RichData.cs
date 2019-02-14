@@ -36,7 +36,7 @@ public class RichLotteryRecord
 public class RichDataEntry {
 
 
-    public long m_Issue;  //期号
+    public ulong m_Issue;  //期号
 
     public DateTime m_Date;    //开奖日期
 
