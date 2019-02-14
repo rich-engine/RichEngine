@@ -42,11 +42,15 @@ public class RichDataEntry {
 
     public int[] m_RandNumbers; //推荐号码
 
+    public int[] m_KeepNumbers; //推荐号码
+
     public int[] m_LotteryNumbers; // 中奖号码
 
     public bool m_hasBuy;   //是否购买
 
-    public int m_HitLevel;  //中几等奖    -1 不中奖
+    public int m_HitLevel_Rand;  //中几等奖    -1 不中奖
+
+    public int m_HitLevel_Keep;  //中几等奖    -1 不中奖
 
     public bool m_hasResult;    //是否开奖
 
