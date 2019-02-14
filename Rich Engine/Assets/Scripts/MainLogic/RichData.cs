@@ -63,47 +63,47 @@ public class RichDataEntry {
 
     //Json 处理 
 
-    public RichDataEntry(JsonData data)
-    {
-        m_Issue = (string)data["m_Issue"];
-        m_Date = DateTime.Parse((string)data["m_Date"]);
+    //public RichDataEntry(JsonData data)
+    //{
+    //    m_Issue = (string)data["m_Issue"];
+    //    m_Date = DateTime.Parse((string)data["m_Date"]);
 
-        m_RandNumbers = JsonHelper.String2Array<int>((string)data["m_RandNumbers"],JsonHelper.Str2Int);
-        m_LotteryNumbers = JsonHelper.String2Array<int>((string)data["m_LotteryNumbers"], JsonHelper.Str2Int);
+    //    m_RandNumbers = JsonHelper.String2Array<int>((string)data["m_RandNumbers"],JsonHelper.Str2Int);
+    //    m_LotteryNumbers = JsonHelper.String2Array<int>((string)data["m_LotteryNumbers"], JsonHelper.Str2Int);
 
-        m_hasBuy = (bool)data["m_hasBuy"];
-        m_HitLevel = (int)data["m_HitLevel"];
-        m_hasResult = (bool)data["m_hasResult"];
-    }
+    //    m_hasBuy = (bool)data["m_hasBuy"];
+    //    m_HitLevel = (int)data["m_HitLevel"];
+    //    m_hasResult = (bool)data["m_hasResult"];
+    //}
 
 
-    public void ToJson(JsonWriter writer)
-    {
-        writer.WriteObjectStart();
+    //public void ToJson(JsonWriter writer)
+    //{
+    //    writer.WriteObjectStart();
 
-        writer.WritePropertyName("m_Issue");
-        writer.Write(m_Issue);
+    //    writer.WritePropertyName("m_Issue");
+    //    writer.Write(m_Issue);
 
-        writer.WritePropertyName("m_Date");
-        writer.Write(m_Date.ToString());
+    //    writer.WritePropertyName("m_Date");
+    //    writer.Write(m_Date.ToString());
 
-        writer.WritePropertyName("m_RandNumbers");
-        writer.Write(JsonHelper.Array2String<int>(m_RandNumbers));
+    //    writer.WritePropertyName("m_RandNumbers");
+    //    writer.Write(JsonHelper.Array2String<int>(m_RandNumbers));
 
-        writer.WritePropertyName("m_LotteryNumbers");
-        writer.Write(JsonHelper.Array2String<int>(m_LotteryNumbers));
+    //    writer.WritePropertyName("m_LotteryNumbers");
+    //    writer.Write(JsonHelper.Array2String<int>(m_LotteryNumbers));
 
-        writer.WritePropertyName("m_hasBuy");
-        writer.Write(m_hasBuy);
+    //    writer.WritePropertyName("m_hasBuy");
+    //    writer.Write(m_hasBuy);
 
-        writer.WritePropertyName("m_HitLevel");
-        writer.Write(m_HitLevel);
+    //    writer.WritePropertyName("m_HitLevel");
+    //    writer.Write(m_HitLevel);
 
-        writer.WritePropertyName("m_hasResult");
-        writer.Write(m_hasResult);
+    //    writer.WritePropertyName("m_hasResult");
+    //    writer.Write(m_hasResult);
 
-        writer.WriteObjectEnd();
-    }
+    //    writer.WriteObjectEnd();
+    //}
 
 }
 
