@@ -114,11 +114,7 @@ public class RichEngine : MonoBehaviour {
     }
 
 
-
-
-
     //根据lotteryType 获取 lotteryLink
-
     public string GetLotteryQueryLink(string lotteryType,string queryType)
     {
         LotteryTypeSetting set = m_setting.m_LottryTypes[lotteryType];
@@ -134,4 +130,16 @@ public class RichEngine : MonoBehaviour {
         return string.Empty;
     }
     
+
+    //随机列表
+
+    //获取随机
+    public int[] GetRandNumbers(string lotteryType,ulong issue,string randType)
+    {
+        RichLotteryRecord record = m_dataCenter.GetRecordOf(lotteryType);
+        RichDataEntry entry = m_dataCenter.GetEntryOf(record, issue);
+
+        //找到随机
+
+    }
 }
