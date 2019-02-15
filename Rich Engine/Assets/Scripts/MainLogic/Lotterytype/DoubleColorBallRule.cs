@@ -2,24 +2,24 @@
 using System;
 
 
-public class SuperBigLotteryRule : ILotteryRule
+public class DoubleColorBallRule : ILotteryRule
 {
     int NumCount = 7;
-    int beforeNum = 5; 
+    int beforeNum = 6;
     
-    static SuperBigLotteryRule()
+    static DoubleColorBallRule()
     {
-        SuperBigLotteryRule rule = new SuperBigLotteryRule();
+        DoubleColorBallRule rule = new DoubleColorBallRule();
         LotteryRuleFactory.Regist(rule.GetLotteryType(), rule);
     }
 
-    private SuperBigLotteryRule()
+    private DoubleColorBallRule()
     {
     }
 
     public string GetLotteryType()
     {
-        return "超级大乐透";
+        return "双色球";
     }
 
 
@@ -42,7 +42,7 @@ public class SuperBigLotteryRule : ILotteryRule
         nextData.m_HitLevel_Keep = -1;
         nextData.m_hasResult = false;
 
-        if ((int)data.m_Date.DayOfWeek == 3)
+        if ((int)data.m_Date.DayOfWeek == 4)
         {
             nextData.m_Date = data.m_Date.AddDays(3);
         }
@@ -54,7 +54,7 @@ public class SuperBigLotteryRule : ILotteryRule
         if (data.m_Date.Year < nextData.m_Date.Year)
         {
             int _remainder = nextData.m_Date.Year % 100;
-            nextData.m_Issue = (ulong)_remainder *1000 + 1;
+            nextData.m_Issue = (ulong)_remainder * 1000 + 1;
         }
         else
             nextData.m_Issue = data.m_Issue + 1;
@@ -103,39 +103,27 @@ public class SuperBigLotteryRule : ILotteryRule
             }
         }
 
-        if ((_beforeNum == 0 &&_afterNum == 2)||(_beforeNum == 1 && _afterNum == 2) || (_beforeNum == 2 && _afterNum == 1) || (_beforeNum == 3 && _afterNum == 0))
-        {
-            return 9;
-        }
-        else if ((_beforeNum == 2 && _afterNum == 2) || (_beforeNum == 3 && _afterNum == 1))
-        {
-            return 8;
-        }
-        else if (_beforeNum == 4 && _afterNum == 0)
-        {
-            return 7;
-        }
-        else if (_beforeNum == 3 && _afterNum == 2)
+        if ((_beforeNum == 2 &&_afterNum == 1)||(_beforeNum == 1 && _afterNum == 1) || (_beforeNum == 0 && _afterNum == 1))
         {
             return 6;
         }
-        else if (_beforeNum == 4 && _afterNum == 1)
+        else if ((_beforeNum == 4 && _afterNum == 0) || (_beforeNum == 3 && _afterNum == 1))
         {
             return 5;
         }
-        else if (_beforeNum == 4 && _afterNum == 2)
+        else if ((_beforeNum == 5 && _afterNum == 0)||(_beforeNum == 4 && _afterNum == 1))
         {
             return 4;
         }
-        else if (_beforeNum == beforeNum && _afterNum == 0)
+        else if (_beforeNum == 5 && _afterNum == 1)
         {
             return 3;
         }
-        else if (_beforeNum == beforeNum && _afterNum == 1)
+        else if (_beforeNum == beforeNum && _afterNum == 0)
         {
             return 2;
         }
-        else if (_beforeNum == beforeNum && _afterNum == NumCount - beforeNum)
+        else if (_beforeNum == beforeNum && _afterNum == NumCount- beforeNum)
         {
             return 1;
         }
