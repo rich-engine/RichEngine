@@ -480,8 +480,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VERSION: 1.0
-  DataSaveFileName: 
-  UseQueryAPI: 
+  DataSaveFileName: RichData.txt
+  UseQueryAPI: http://www.opencai.net/
 --- !u!4 &236148941
 Transform:
   m_ObjectHideFlags: 0
@@ -1102,7 +1102,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LotteryType: "\u8D85\u7EA7\u5927\u4E50\u900F"
-  queryMaps: []
+  queryMaps:
+  - QueryAPI: http://www.opencai.net/
+    LotteryLink: http://t.apiplus.net/dlt-20.json
   totalNum: 7
   segments:
   - max: 35
@@ -2151,7 +2153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LotteryType: "\u53CC\u8272\u7403"
-  queryMaps: []
+  queryMaps:
+  - QueryAPI: http://www.opencai.net/
+    LotteryLink: http://t.apiplus.net/ssq-20.json
   totalNum: 7
   segments:
   - max: 33
