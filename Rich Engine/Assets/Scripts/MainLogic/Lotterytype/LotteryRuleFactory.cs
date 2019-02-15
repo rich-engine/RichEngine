@@ -20,6 +20,12 @@ public class LotteryRuleFactory  {
     static LotteryRuleFactory()
     {
         ms_LotteryRuleMap = new Dictionary<string, ILotteryRule>();
+
+
+        //Toggle
+
+        SuperBigLotteryRule.Toggle();
+        DoubleColorBallRule.Toggle();
     }
 
     public static void Regist(string lotteryType, ILotteryRule rule)

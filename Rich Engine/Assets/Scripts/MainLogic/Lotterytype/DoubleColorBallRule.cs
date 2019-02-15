@@ -7,7 +7,13 @@ public class DoubleColorBallRule : ILotteryRule
 {
     int NumCount = 7;
     int beforeNum = 6;
-    
+
+
+    public static void Toggle()
+    {
+
+    }
+
     static DoubleColorBallRule()
     {
         DoubleColorBallRule rule = new DoubleColorBallRule();

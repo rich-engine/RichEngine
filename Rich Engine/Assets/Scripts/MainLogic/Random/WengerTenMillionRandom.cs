@@ -6,6 +6,12 @@ using System.Collections.Generic;
 public class WengerTenMillionRandom : IRandom
 {
 
+
+    public static void Toggle()
+    {
+
+    }
+
     static WengerTenMillionRandom()
     {
         WengerTenMillionRandom rand = new WengerTenMillionRandom();

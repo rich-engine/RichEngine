@@ -30,6 +30,12 @@ public class LotteryQueryFactory
     static LotteryQueryFactory()
     {
         ms_LotteryQueryMap = new Dictionary<string, ILotteryResultQuery>();
+
+
+        //Toggle
+
+        Query_To_OpenCai.Toggle();
+
     }
 
     public static void Regist(string queryType, ILotteryResultQuery query)

@@ -5,8 +5,14 @@ using System.Linq;
 public class SuperBigLotteryRule : ILotteryRule
 {
     int NumCount = 7;
-    int beforeNum = 5; 
-    
+    int beforeNum = 5;
+
+
+    public static void Toggle()
+    {
+
+    }
+
     static SuperBigLotteryRule()
     {
         SuperBigLotteryRule rule = new SuperBigLotteryRule();

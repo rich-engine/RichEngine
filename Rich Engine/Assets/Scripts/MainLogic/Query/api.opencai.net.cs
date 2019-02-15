@@ -36,6 +36,11 @@ public class Query_To_OpenCai :  ILotteryResultQuery
 {
 
 
+    public static void Toggle()
+    {
+
+    }
+
     static Query_To_OpenCai()
     {
         Query_To_OpenCai query = new Query_To_OpenCai();

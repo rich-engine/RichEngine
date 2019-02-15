@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class CarrionTenMillionRandom : IRandom {
 
+
+    public static void Toggle()
+    {
+
+    }
+
     static CarrionTenMillionRandom()
     {
         CarrionTenMillionRandom rand = new CarrionTenMillionRandom();

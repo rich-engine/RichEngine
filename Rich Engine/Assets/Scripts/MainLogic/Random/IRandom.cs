@@ -25,6 +25,10 @@ public class RandomFactory
     static RandomFactory()
     {
         ms_randMap = new Dictionary<string, IRandom>();
+
+        //Toggle 
+        WengerTenMillionRandom.Toggle();
+        CarrionTenMillionRandom.Toggle();
     }
 
     public static void Regist(string queryType, IRandom rand)
