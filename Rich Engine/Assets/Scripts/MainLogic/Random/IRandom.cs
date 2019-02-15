@@ -38,7 +38,7 @@ public class RandomFactory
 
         if (!ms_randMap.TryGetValue(randType, out rand))
         {
-            Debug.LogWarning("不存在 " + queryType + " 接口的数据源！无法做中奖验证！");
+            Debug.LogWarning("不存在 " + rand + " 随机方法！");
 
             return null;
         }

@@ -141,8 +141,20 @@ public class RichEngine : MonoBehaviour {
 
         //找到随机
         IRandom rand = RandomFactory.GetRandom(randType);
+        rand.SetRandomSeed(entry);
 
+        //获取规则
+        int count = m_setting.m_LottryTypes[lotteryType].totalNum;
+        var seg = m_setting.m_LottryTypes[lotteryType].segments;
+        int[] result = new int[count];
+        int pos = 0;
+        foreach(var s in seg)
+        {
+            int[] r = rand.GetRandNum(s.max, s.min, s.count);
+            r.CopyTo(result, pos);
+            pos += s.count;
+        }
 
-        return null;
+        return result;
     }
 }
