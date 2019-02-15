@@ -13,6 +13,8 @@ public class RichArchieve
     public DateTime m_CreateTime;
 
     public List<RichLotteryRecord> m_RecordsList;
+
+
 }
 
 
@@ -46,14 +48,15 @@ public class RichDataEntry {
 
     public int[] m_LotteryNumbers; // 中奖号码
 
-    public bool m_hasBuy;   //是否购买
+    public bool m_hasBuy = false;   //是否购买
 
     public int m_HitLevel_Rand;  //中几等奖    -1 不中奖
 
     public int m_HitLevel_Keep;  //中几等奖    -1 不中奖
 
-    public bool m_hasResult;    //是否开奖
+    public bool m_hasResult = false;    //是否开奖
 
+    public bool m_isExpired = false;    //是否超出查询
 
 
     public RichDataEntry()
@@ -126,7 +129,8 @@ public class RichDataManager
         if (!File.Exists(m_filePath))
         {
             //无初始文件
-
+            //创建新的
+            CreateNewArchieve();
             return;
         }
 
@@ -150,6 +154,13 @@ public class RichDataManager
         m_archieve = JsonMapper.ToObject<RichArchieve>(input);
 
     }
+    void CreateNewArchieve()
+    {
+        m_archieve = new RichArchieve();
+        m_archieve.m_AppVersion = RichEngine.Instance.m_setting.VERSION;
+        m_archieve.m_CreateTime = DateTime.Now;
+        m_archieve.m_RecordsList = new List<RichLotteryRecord>();
+    }
 
     //保存数据
     public void SaveData()
@@ -166,8 +177,115 @@ public class RichDataManager
 
 
     //UI 数据查询接口
+    //获取档案数据结构
+    public RichArchieve GetQueryArchieve()
+    {
+        return m_archieve;
+    }
     
+    //创建新的彩票记录
+    public void CreateNewRecord(string lotteryType)
+    {
+        bool isExist = false;
+        
+        foreach(var rec in m_archieve.m_RecordsList)
+        {
+            if(rec.m_LotteryType == lotteryType)
+            {
+                isExist = true;
+                break;
+            }
+        }
+
+        if(isExist)
+        {
+            //已经存在  报错
+
+            return;
+        }
+
+        //创建新的
+
+        RichLotteryRecord record = new RichLotteryRecord();
+        record.m_LotteryType = lotteryType;
+        //几个数据
+        record.m_KeepNumbers = null;
+
+        record.m_RichList = new List<RichDataEntry>();
+    }
+
+    //设置守号
+    public void SetKeepNumbers(string lotteryType,int[] nums)
+    {
+        var rec = GetRecordOf(lotteryType);
+
+        if(rec == null)
+        {
+            //不存在 报错
+
+            return;
+        }
+        //
+        rec.m_KeepNumbers = nums;
+
+        //所有没有开奖 没有超期 还没有买的 刷新守号
+        //Todo 可能不需要刷新  在点击购买时候填充就好
+        foreach(var entry in rec.m_RichList)
+        {
+            if(!entry.m_isExpired && !entry.m_hasResult  && !entry.m_hasBuy)
+            {
+                entry.m_KeepNumbers = nums;
+            }
+        }
+    }
+
+    //设置购买
+    public void SetBuy(string lotteryType,ulong issue,int[] nums)
+    {
+        var rec = GetRecordOf(lotteryType);
+
+        if (rec == null)
+        {
+            //不存在 报错
+
+            return;
+        }
+
+        var entry = GetEntryOf(rec, issue);
+        if (entry == null)
+        {
+            //不存在 报错
+
+            return;
+        }
+
+        entry.m_hasBuy = true;
+    }
 
 
+    RichLotteryRecord GetRecordOf(string lotteryType)
+    {
+        foreach (var rec in m_archieve.m_RecordsList)
+        {
+            if (rec.m_LotteryType == lotteryType)
+            {
+                return rec;
+            }
+        }
 
+        return null;
+    }
+
+    RichDataEntry GetEntryOf(RichLotteryRecord record,ulong issue)
+    {
+        foreach (var entry in record.m_RichList)
+        {
+            if (entry.m_Issue == issue)
+            {
+                return entry;
+            }
+        }
+
+        return null;
+    }
 }
