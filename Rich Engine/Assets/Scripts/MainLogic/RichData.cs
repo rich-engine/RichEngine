@@ -240,7 +240,7 @@ public class RichDataManager
     }
 
     //设置购买
-    public void SetBuy(string lotteryType,ulong issue,int[] nums)
+    public void SetBuy(string lotteryType,ulong issue)
     {
         var rec = GetRecordOf(lotteryType);
 

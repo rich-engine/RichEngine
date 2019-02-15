@@ -107,7 +107,7 @@ public class RichEngine : MonoBehaviour {
 
             var newEntry = rule.GetNextIssue(lastestEntry);
 
-            record.m_RichList.Remove(newEntry);
+            record.m_RichList.Add(newEntry);
         }
 
     }

@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System;
-
+using System.Linq;
 
 public class SuperBigLotteryRule : ILotteryRule
 {
@@ -68,8 +68,6 @@ public class SuperBigLotteryRule : ILotteryRule
         int[] _afterCompare = new int[NumCount- beforeNum];
         int[] _beforeLottery = new int[beforeNum];
         int[] _afterLottery = new int[NumCount- beforeNum];
-        int _beforeNum = 0;
-        int _afterNum = 0;
 
         for (int i=0; i < compareNumber.Length;i++)
         {
@@ -84,24 +82,9 @@ public class SuperBigLotteryRule : ILotteryRule
                 _afterLottery[i- beforeNum] = lotteryNumbers[i];
             }
         }
-        
-        for (int i = 0; i < _beforeCompare.Length; i++)
-        {
-            int index = Array.IndexOf(_beforeLottery, _beforeCompare[i]);
-            if (index != -1)
-            {
-                _beforeNum++;
-            }
-        }
 
-        for (int i = 0; i < _afterCompare.Length; i++)
-        {
-            int index = Array.IndexOf(_afterLottery, _afterCompare[i]);
-            if (index != -1)
-            {
-                _afterNum++;
-            }
-        }
+        int _beforeNum = _beforeCompare.Intersect(_afterCompare).ToArray().Length;
+        int _afterNum = _afterCompare.Intersect(_afterLottery).ToArray().Length;
 
         if ((_beforeNum == 0 &&_afterNum == 2)||(_beforeNum == 1 && _afterNum == 2) || (_beforeNum == 2 && _afterNum == 1) || (_beforeNum == 3 && _afterNum == 0))
         {

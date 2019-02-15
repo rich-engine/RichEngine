@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System;
+using System.Linq;
 
 public class ListScroll : MonoBehaviour {
 	public List<GameObject> items = new List<GameObject>();
@@ -10,15 +12,17 @@ public class ListScroll : MonoBehaviour {
 
 	private ArrayList mList = new ArrayList();
 	private string m_personID = "-1";
+    RichDataEntry data = new RichDataEntry();
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         mCount = 0;
-        for (int i = 0; i < 12; i++)
-        {
-            mList.Add(i);
+        //for (int i = 0; i < 12; i++)
+        //{
+        //    mList.Add(i);
 
-        }
+        //}
+
     }
 
     void Update()
@@ -35,7 +39,7 @@ public class ListScroll : MonoBehaviour {
                     break;
                 }
                 items[10 - count + i].SetActive(true);
-                items[10 - count + i].GetComponent<ListItemUI>().SetItemData(items[0], i);
+                items[10 - count + i].GetComponent<ListItemUI>().SetItemData(data, i);
             }
 
             mCount = count;
@@ -60,8 +64,7 @@ public class ListScroll : MonoBehaviour {
 
                 items.RemoveAt(items.Count - 1);//将之前最后元素删除
 
-                //Emails email = m_inBoxList[index] as Emails;
-                items[0].GetComponent<ListItemUI>().SetItemData(items[0], index);
+                items[0].GetComponent<ListItemUI>().SetItemData(data, index);
             }
             if (items[0].transform.position.y <= -100)//下滑
             {
@@ -79,8 +82,7 @@ public class ListScroll : MonoBehaviour {
 
                 items.RemoveAt(0);//将之前最前面的元素删除；
 
-                //Emails email = m_inBoxList[index] as Emails;
-                items[items.Count - 1].GetComponent<ListItemUI>().SetItemData(items[0], index);
+                items[items.Count - 1].GetComponent<ListItemUI>().SetItemData(data, index);
             }
         }
     }
