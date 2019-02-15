@@ -80,11 +80,11 @@ public class Query_To_OpenCai :  ILotteryResultQuery
             foreach (JsonData row in json["data"])
             {
 
-                int i = 0;
+                ulong issue = ulong.Parse(row["expect"].ToString());
 
-                m_resultEntryMap.Add((ulong)row["expect"], row);
+                m_resultEntryMap.Add(issue, row);
 
-                m_lastedIssue = Math.Max(m_lastedIssue, (ulong)row["expect"]);
+                m_lastedIssue = Math.Max(m_lastedIssue, issue);
             }
 
             return true; 
@@ -123,9 +123,17 @@ public class Query_To_OpenCai :  ILotteryResultQuery
 
         JsonData lastedResult = m_resultEntryMap[m_lastedIssue];
 
-        entry.m_Issue = (ulong)lastedResult["expect"];
-        entry.m_LotteryNumbers = JsonMapper.ToObject<int[]>(lastedResult["opencode"].ToJson());
-        entry.m_Date = JsonMapper.ToObject<DateTime>(lastedResult["opentime"].ToJson());
+        entry.m_Issue = ulong.Parse(lastedResult["expect"].ToString());
+
+        string[] strArr = lastedResult["opencode"].ToString().Replace('+', ',').Split(',');
+        entry.m_LotteryNumbers = new int[strArr.Length];
+        for(int i = 0; i<strArr.Length;i++)
+        {
+            entry.m_LotteryNumbers[i] = int.Parse(strArr[i]);
+        }
+
+        //entry.m_Date = JsonMapper.ToObject<DateTime>(lastedResult["opentime"].ToJson());
+        entry.m_Date = DateTime.Parse(lastedResult["opentime"].ToString());
         entry.m_hasResult = true;
 
         return entry;

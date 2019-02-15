@@ -1104,7 +1104,7 @@ MonoBehaviour:
   LotteryType: "\u8D85\u7EA7\u5927\u4E50\u900F"
   queryMaps:
   - QueryAPI: http://www.opencai.net/
-    LotteryLink: http://t.apiplus.net/dlt-20.json
+    LotteryLink: http://r.apiplus.net/newly.do?token=af163157a99a04029946e684e27a49d8&code=dlt&rows=50&format=json
   totalNum: 7
   segments:
   - max: 35
@@ -2155,7 +2155,7 @@ MonoBehaviour:
   LotteryType: "\u53CC\u8272\u7403"
   queryMaps:
   - QueryAPI: http://www.opencai.net/
-    LotteryLink: http://t.apiplus.net/ssq-20.json
+    LotteryLink: http://r.apiplus.net/newly.do?token=af163157a99a04029946e684e27a49d8&code=ssq&rows=50&format=json
   totalNum: 7
   segments:
   - max: 33

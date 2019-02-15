@@ -40,7 +40,7 @@ public class ListItemUI : MonoBehaviour
     public void SetItemData(RichDataEntry data, int index)
     {
         m_index = index;
-        //txt_Issue.text = data.m_Issue.ToString();
+        txt_Issue.text = data.m_Issue.ToString();
         //txt_Data.text = data.m_Date.ToString();
         //txt_KeepNunber.text = data.m_KeepNumbers.ToString();
         //txt_LotteryNumbers.text = data.m_LotteryNumbers.ToString();
