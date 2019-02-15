@@ -5,6 +5,28 @@ using System.Collections.Generic;
 
 public class WengerTenMillionRandom : IRandom
 {
+
+    static WengerTenMillionRandom()
+    {
+        WengerTenMillionRandom rand = new WengerTenMillionRandom();
+        RandomFactory.Regist(rand.GetRandType(), rand);
+    }
+
+    private WengerTenMillionRandom()
+    {
+
+    }
+
+    //获取随机方法名称
+    public string GetRandType()
+    {
+        return "Wenger的百万随机";
+    }
+
+
+
+
+
     public void SetRandomSeed(RichDataEntry seed)
     {
 

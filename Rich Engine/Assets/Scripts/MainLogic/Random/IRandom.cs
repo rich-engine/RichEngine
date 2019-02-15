@@ -27,23 +27,23 @@ public class RandomFactory
         ms_randMap = new Dictionary<string, IRandom>();
     }
 
-    public static void Regist(string queryType, IRandom query)
+    public static void Regist(string queryType, IRandom rand)
     {
-        ms_randMap.Add(queryType, query);
+        ms_randMap.Add(queryType, rand);
     }
 
-    public static ILotteryResultQuery GetLotteryQuery(string queryType)
+    public static IRandom GetRandom(string randType)
     {
-        ILotteryResultQuery query;
+        IRandom rand;
 
-        if (!ms_randMap.TryGetValue(queryType, out query))
+        if (!ms_randMap.TryGetValue(randType, out rand))
         {
             Debug.LogWarning("不存在 " + queryType + " 接口的数据源！无法做中奖验证！");
 
             return null;
         }
 
-        return query.NewQuery();
+        return rand;
     }
 
 }

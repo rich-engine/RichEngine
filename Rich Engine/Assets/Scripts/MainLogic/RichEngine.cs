@@ -140,6 +140,9 @@ public class RichEngine : MonoBehaviour {
         RichDataEntry entry = m_dataCenter.GetEntryOf(record, issue);
 
         //找到随机
+        IRandom rand = RandomFactory.GetRandom(randType);
 
+
+        return null;
     }
 }
