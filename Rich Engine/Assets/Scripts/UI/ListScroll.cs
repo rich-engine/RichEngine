@@ -9,28 +9,29 @@ public class ListScroll : MonoBehaviour {
 	public List<GameObject> items = new List<GameObject>();
 
 	private int mCount = 0;
-
-	private ArrayList mList = new ArrayList();
 	private string m_personID = "-1";
+    RichLotteryRecord m_Record;
     RichDataEntry data = new RichDataEntry();
 
     // Use this for initialization
     void Start () {
         mCount = 0;
-        //for (int i = 0; i < 12; i++)
-        //{
-        //    mList.Add(i);
 
-        //}
+        //int[] types = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
+        //string result = String.Join(",", types);
+        //Debug.Log("re" + result);
+        m_Record = RichEngine.Instance.m_dataCenter.GetRecordOf("超级大乐透");
+
+        
     }
 
     void Update()
     {
-        if (mCount < mList.Count)
+        if (mCount < m_Record.m_RichList.Count)
         {
             //根据item数量改变滚动区域的大小
-            int count = mList.Count;
+            int count = m_Record.m_RichList.Count;
             transform.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 200 * count);
             for (int i = count - 1; i >= 0; i--)
             {
@@ -46,7 +47,7 @@ public class ListScroll : MonoBehaviour {
             Debug.Log("email count  " + mCount);
         }
 
-        if (mList.Count > 10)
+        if (m_Record.m_RichList.Count > 10)
         {
             if (items[0].transform.position.y >= -100)//上滑
             {
@@ -69,7 +70,7 @@ public class ListScroll : MonoBehaviour {
             if (items[0].transform.position.y <= -100)//下滑
             {
                 int index = items[items.Count - 1].GetComponent<ListItemUI>().m_index + 1;//首先判断是否为最后，是的话就表示显示完了，不需要换位置了
-                if (index >= mList.Count)
+                if (index >= m_Record.m_RichList.Count)
                 {
                     return;
                 }
@@ -86,15 +87,5 @@ public class ListScroll : MonoBehaviour {
             }
         }
     }
-
-
-    void DeleteItem(Transform item)
-	{
-        mList.Remove (item.gameObject);
-		Destroy (item.gameObject);
-
-		int count = mList.Count;
-		transform.GetComponent<RectTransform> ().sizeDelta = new Vector2(0, 200*count);
-	}
 }
 

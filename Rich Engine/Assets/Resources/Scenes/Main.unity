@@ -1101,14 +1101,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f60469b4ed0504aad433059108f075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LotteryType: 
-  queryMaps:
-  - QueryAPI: 
-    LotteryLink: 
-  - QueryAPI: 
-    LotteryLink: 
+  LotteryType: "\u8D85\u7EA7\u5927\u4E50\u900F"
+  queryMaps: []
   totalNum: 7
-  segments: []
+  segments:
+  - max: 35
+    min: 1
+    count: 5
+  - max: 12
+    min: 1
+    count: 2
 --- !u!1 &1134742481
 GameObject:
   m_ObjectHideFlags: 0
@@ -2148,10 +2150,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f60469b4ed0504aad433059108f075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LotteryType: 
+  LotteryType: "\u53CC\u8272\u7403"
   queryMaps: []
   totalNum: 7
-  segments: []
+  segments:
+  - max: 33
+    min: 1
+    count: 6
+  - max: 16
+    min: 1
+    count: 1
 --- !u!1001 &1642499379
 Prefab:
   m_ObjectHideFlags: 0
