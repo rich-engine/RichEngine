@@ -79,6 +79,9 @@ public class Query_To_OpenCai :  ILotteryResultQuery
             m_resultEntryMap.Clear();
             foreach (JsonData row in json["data"])
             {
+
+                int i = 0;
+
                 m_resultEntryMap.Add((ulong)row["expect"], row);
 
                 m_lastedIssue = Math.Max(m_lastedIssue, (ulong)row["expect"]);

@@ -213,6 +213,8 @@ public class RichDataManager
 
         record.m_RichList = new List<RichDataEntry>();
 
+        m_archieve.m_RecordsList.Add(record);
+
         //查询 
         RichEngine.Instance.Query(lotteryType);
 
