@@ -11,11 +11,6 @@ public class RichEngine : MonoBehaviour {
         get { return msRichEngine; }
     }
 
-    void Awake()
-    {
-        msRichEngine = this;   
-    }
-
 
 
     //engine 实体
@@ -23,24 +18,21 @@ public class RichEngine : MonoBehaviour {
     public RichDataManager m_dataCenter;
 
     RichArchieve m_data;
-    Dictionary<string,ILotteryResultQuery> m_queriesMap;
+    ILotteryResultQuery m_query;
 
 
-    void Start()
+    void Awake()
     {
+        msRichEngine = this;
+
+        m_setting.Load();
+
         m_dataCenter = new RichDataManager();
         m_dataCenter.LoadData();
-
-        m_queriesMap = new Dictionary<string, ILotteryResultQuery>();
-
+        
         m_data = m_dataCenter.GetQueryArchieve();
 
-        foreach(var record in m_data.m_RecordsList)
-        {
-            var query = LotteryQueryFactory.GetLotteryQuery(m_setting.UseQueryAPI);
-            m_queriesMap.Add(record.m_LotteryType, query);
-        }
-
+        m_query = LotteryQueryFactory.GetLotteryQuery(m_setting.UseQueryAPI);
 
     }
 
@@ -50,16 +42,25 @@ public class RichEngine : MonoBehaviour {
     void FixedUpdate()
     {
         foreach (var record in m_data.m_RecordsList)
-        {
-            ILotteryResultQuery query = m_queriesMap[record.m_LotteryType];
-            bool bGettOK = query.GetData(record.m_LotteryType);
+        {            
+            bool bGetOK = m_query.GetData(record.m_LotteryType);
 
-            if (!bGettOK) continue;
+            if (!bGetOK) continue;
             //执行比较现有数据
-            CompareLottery(query, record);
+            CompareLottery(m_query, record);
         }
 
         m_dataCenter.SaveData();
+    }
+
+    //单条查询
+    public void Query(string lotteryType)
+    {
+        var record = m_dataCenter.GetRecordOf(lotteryType);
+        bool bGetOK = m_query.GetData(record.m_LotteryType);
+        if (!bGetOK) return;
+        //执行比较现有数据
+        CompareLottery(m_query, record);
     }
 
 
@@ -116,7 +117,7 @@ public class RichEngine : MonoBehaviour {
 
 
 
-    //临时做法  根据lotteryType 获取 lotteryLink
+    //根据lotteryType 获取 lotteryLink
 
     public string GetLotteryQueryLink(string lotteryType,string queryType)
     {

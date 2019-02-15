@@ -19,7 +19,7 @@ public class Setting : MonoBehaviour {
     public Dictionary<string, LotteryTypeSetting> m_LottryTypes = new Dictionary<string, LotteryTypeSetting>();
 
 
-    void Start()
+    public void Load()
     {
         var lts = GetComponentsInChildren<LotteryTypeSetting>();
 

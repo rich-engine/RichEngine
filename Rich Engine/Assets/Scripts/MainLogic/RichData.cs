@@ -212,6 +212,12 @@ public class RichDataManager
         record.m_KeepNumbers = null;
 
         record.m_RichList = new List<RichDataEntry>();
+
+        //查询 
+        RichEngine.Instance.Query(lotteryType);
+
+        //保存
+        SaveData();
     }
 
     //设置守号
@@ -237,6 +243,10 @@ public class RichDataManager
                 entry.m_KeepNumbers = nums;
             }
         }
+
+
+        //保存
+        SaveData();
     }
 
     //设置购买
@@ -260,10 +270,40 @@ public class RichDataManager
         }
 
         entry.m_hasBuy = true;
+
+        //保存
+        SaveData();
     }
 
 
-    RichLotteryRecord GetRecordOf(string lotteryType)
+    //设置随机号
+    public void SetRandNumbers(string lotteryType, ulong issue, int[] nums)
+    {
+        var rec = GetRecordOf(lotteryType);
+
+        if (rec == null)
+        {
+            //不存在 报错
+
+            return;
+        }
+
+        var entry = GetEntryOf(rec, issue);
+        if (entry == null)
+        {
+            //不存在 报错
+
+            return;
+        }
+
+        entry.m_RandNumbers = nums;
+
+        //保存
+        SaveData();
+    }
+
+
+    public RichLotteryRecord GetRecordOf(string lotteryType)
     {
         foreach (var rec in m_archieve.m_RecordsList)
         {
@@ -276,7 +316,7 @@ public class RichDataManager
         return null;
     }
 
-    RichDataEntry GetEntryOf(RichLotteryRecord record,ulong issue)
+    public RichDataEntry GetEntryOf(RichLotteryRecord record,ulong issue)
     {
         foreach (var entry in record.m_RichList)
         {

@@ -60,6 +60,7 @@ public class SuperBigLotteryRule : ILotteryRule
             nextData.m_Issue = data.m_Issue + 1;
 
         return nextData;
+
     }
 
     private int Winning(int [] compareNumber,int[] lotteryNumbers)
