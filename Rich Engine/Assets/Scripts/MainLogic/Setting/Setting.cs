@@ -18,6 +18,8 @@ public class Setting : MonoBehaviour {
     public Dictionary<string, LotteryTypeSetting> m_LottryTypes = new Dictionary<string, LotteryTypeSetting>();
 
 
+    //查询间隔
+    public float m_QueryInterval = 300;
     public void Load()
     {
         var lts = GetComponentsInChildren<LotteryTypeSetting>();

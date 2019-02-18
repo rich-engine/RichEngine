@@ -37,10 +37,15 @@ public class RichEngine : MonoBehaviour {
     }
 
 
-
+    float m_timeCount = 0;
     //设置成 5分钟执行一次 project setting
     void FixedUpdate()
     {
+        m_timeCount += Time.fixedDeltaTime;
+        if (m_timeCount < m_setting.m_QueryInterval) return;
+        m_timeCount -= m_setting.m_QueryInterval;
+
+
         foreach (var record in m_data.m_RecordsList)
         {            
             bool bGetOK = m_query.GetData(record.m_LotteryType);
