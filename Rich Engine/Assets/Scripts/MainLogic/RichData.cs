@@ -141,10 +141,10 @@ public class RichDataManager
 
         // 判断 Version
         if ((string)jd["m_AppVersion"] != RichEngine.Instance.m_setting.VERSION)
-        { 
+        {
             //警告有错 以及 错误处理
 
-
+            Debug.LogWarning("Version 不同！加载失败！");
 
 
             return;

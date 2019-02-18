@@ -36,6 +36,13 @@ public class RandomFactory
         ms_randMap.Add(queryType, rand);
     }
 
+
+    public Dictionary<string, IRandom>.KeyCollection GetRandomFuncList()
+    {
+        return ms_randMap.Keys;
+    }
+
+
     public static IRandom GetRandom(string randType)
     {
         IRandom rand;
