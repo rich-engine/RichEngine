@@ -31,7 +31,7 @@ public class RandomUI : MonoBehaviour
         if (data.m_RandNumbers == null)
             txt_RandNumbers.text = "";
         else
-            txt_RandNumbers.text = UIController.Instance.IntConvertString(data.m_RandNumbers, ",");
+            txt_RandNumbers.text = UIController.Instance.IntConvertString(data.m_RandNumbers);
     }
 
     private void btnSureClick()

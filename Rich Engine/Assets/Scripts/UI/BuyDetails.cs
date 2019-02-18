@@ -35,12 +35,12 @@ public class BuyDetails : MonoBehaviour
         if (data.m_KeepNumbers == null)
             txt_KeepNunbers.text = "";
         else
-            txt_KeepNunbers.text = UIController.Instance.IntConvertString(data.m_KeepNumbers, ",");
+            txt_KeepNunbers.text = UIController.Instance.IntConvertString(data.m_KeepNumbers);
 
         if (data.m_RandNumbers == null)
             txt_RandNumbers.text = "";
         else
-            txt_RandNumbers.text = UIController.Instance.IntConvertString(data.m_RandNumbers, ",");
+            txt_RandNumbers.text = UIController.Instance.IntConvertString(data.m_RandNumbers);
     }
 
     public void btnRandomClick()

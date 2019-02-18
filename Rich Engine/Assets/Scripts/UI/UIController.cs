@@ -44,7 +44,7 @@ public class UIController : MonoBehaviour
         return null;
     }
 
-    public string IntConvertString(int[] num,string strMark)
+    public string IntConvertString(int[] num,string strMark = ",")
     {
         string[] s_RandNumbers = Array.ConvertAll<int, string>(num, delegate (int input) { return input.ToString(); });
         string str = string.Join(strMark, s_RandNumbers);

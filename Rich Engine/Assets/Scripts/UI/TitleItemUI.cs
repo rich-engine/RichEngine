@@ -18,7 +18,7 @@ public class TitleItemUI : MonoBehaviour
 	{
         txt_LotteryType = transform.Find ("txt_LotteryType").GetComponent<Text>();
         tog_LotteryType = GetComponent<Toggle>();
-        tog_LotteryType.onValueChanged.AddListener(Toggleclick);
+        tog_LotteryType.onValueChanged.AddListener(ToggleClick);
 
     }
 
@@ -33,7 +33,7 @@ public class TitleItemUI : MonoBehaviour
 
     }
 
-    private void Toggleclick(bool arg)
+    private void ToggleClick(bool arg)
     {
         if (arg)
             UIController.Instance.mSelectIndex = m_index;

@@ -1492,6 +1492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCanvas: {fileID: 0}
+  mSelectIndex: 0
 --- !u!1 &947065667 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1150886637669076, guid: c60314ccaca2cdd4587d6bf503c6ffa2,
@@ -1882,15 +1883,6 @@ Prefab:
       propertyPath: m_Name
       value: Item_0
       objectReference: {fileID: 0}
-    - target: {fileID: 114202017626282308, guid: c60314ccaca2cdd4587d6bf503c6ffa2,
-        type: 2}
-      propertyPath: m_index
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1150886637669076, guid: c60314ccaca2cdd4587d6bf503c6ffa2, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c60314ccaca2cdd4587d6bf503c6ffa2, type: 2}
   m_IsPrefabParent: 0
@@ -2018,7 +2010,7 @@ GameObject:
   - component: {fileID: 1295461852}
   - component: {fileID: 1295461851}
   m_Layer: 5
-  m_Name: Text
+  m_Name: txt_Keep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

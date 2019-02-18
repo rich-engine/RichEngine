@@ -22,6 +22,7 @@ public class ListItemUI : MonoBehaviour
     private Toggle tog_hasBuy;
 
 	public int m_index = -1;
+    string mType;
     RichDataEntry m_richDataEntry;
 
 
@@ -38,62 +39,83 @@ public class ListItemUI : MonoBehaviour
         btn_Keep = transform.Find("btn_Keep").GetComponent<Button>();
         btn_Random = transform.Find("btn_Random").GetComponent<Button>();
         tog_hasBuy = transform.Find("tog_hasBuy").GetComponent<Toggle>();
-        tog_hasBuy.onValueChanged.AddListener(Toggleclick);
+        tog_hasBuy.onValueChanged.AddListener(ToggleClick);
         btn_Details.onClick.AddListener(btnDetailsClick);
         btn_Random.onClick.AddListener(btnRandomClick);
         btn_Keep.onClick.AddListener(btnKeepClick);
     }
 
-    public void SetItemData(RichDataEntry data, int index)
+    public void SetItemData(RichDataEntry data, int index,string type)
     {
         m_richDataEntry = data;
         m_index = index;
-        txt_Issue.text = "第" + data.m_Issue.ToString() + "期";
-        txt_Data.text = data.m_Date.ToString() + "开奖";
-        if (data.m_KeepNumbers == null)
+        mType = type;
+        txt_Issue.text = "第" + m_richDataEntry.m_Issue.ToString() + "期";
+        txt_Data.text = m_richDataEntry.m_Date.ToString() + "开奖";
+        if (m_richDataEntry.m_KeepNumbers == null)
             txt_KeepNunbers.text = "";
         else
-            txt_KeepNunbers.text = UIController.Instance.IntConvertString(data.m_KeepNumbers, ",");
+            txt_KeepNunbers.text = UIController.Instance.IntConvertString(m_richDataEntry.m_KeepNumbers);
 
-        if (data.m_LotteryNumbers == null)
+        if (m_richDataEntry.m_LotteryNumbers == null)
             txt_LotteryNumbers.text = "";
         else
-            txt_LotteryNumbers.text = UIController.Instance.IntConvertString(data.m_LotteryNumbers, ",");
+            txt_LotteryNumbers.text = UIController.Instance.IntConvertString(m_richDataEntry.m_LotteryNumbers);
 
-        if (data.m_RandNumbers == null)
+        if (m_richDataEntry.m_RandNumbers == null)
             txt_RandNumbers.text = "";
         else
-            txt_RandNumbers.text = UIController.Instance.IntConvertString(data.m_RandNumbers, ",");
+            txt_RandNumbers.text = UIController.Instance.IntConvertString(m_richDataEntry.m_RandNumbers);
 
-        tog_hasBuy.isOn = data.m_hasBuy;
-        if (tog_hasBuy.isOn)
+        tog_hasBuy.isOn = m_richDataEntry.m_hasBuy;
+
+        if (m_richDataEntry.m_hasBuy)
         {
-            if (!data.m_hasResult)
+            tog_hasBuy.enabled = false;
+
+            if (!m_richDataEntry.m_hasResult)
             {
                 txt_HitLevel_Rand.text = "未开奖";
                 txt_HitLevel_Keep.text = "未开奖";
             }
-            if (data.m_HitLevel_Rand == -1)
+            if (m_richDataEntry.m_HitLevel_Rand == -1)
                 txt_HitLevel_Rand.text = "未中奖";
             else
-                txt_HitLevel_Rand.text = data.m_HitLevel_Rand + "奖";
+                txt_HitLevel_Rand.text = m_richDataEntry.m_HitLevel_Rand + "奖";
 
-            if (data.m_HitLevel_Keep == -1)
+            if (m_richDataEntry.m_HitLevel_Keep == -1)
                 txt_HitLevel_Keep.text = "未中奖";
             else
-                txt_HitLevel_Keep.text = data.m_HitLevel_Keep + "奖";
+                txt_HitLevel_Keep.text = m_richDataEntry.m_HitLevel_Keep + "奖";
         }
         else
         {
             txt_HitLevel_Rand.text = "未购买";
             txt_HitLevel_Keep.text = "未购买";
+            tog_hasBuy.enabled = true;
         }
+
+        if (m_richDataEntry.m_hasResult || m_richDataEntry.m_isExpired)
+        {
+            tog_hasBuy.enabled = false;
+            btn_Details.enabled = false;
+            btn_Random.enabled = false;
+            btn_Keep.enabled = false;
+        }
+        else
+        {
+            tog_hasBuy.enabled = true;
+            btn_Details.enabled = true;
+            btn_Random.enabled = true;
+            btn_Keep.enabled = true;
+        }
+        
     }
 
-    private void Toggleclick(bool arg)
+    private void ToggleClick(bool arg)
     {
-        Debug.Log("this is Toggle click");
-        Debug.Log(arg);
+        if (arg)
+            RichEngine.Instance.m_dataCenter.SetBuy(mType, m_richDataEntry.m_Issue);
     }
 
     public void btnDetailsClick()
