@@ -9,6 +9,7 @@ public class UIController : MonoBehaviour
 {
     static UIController mUIController;
     public GameObject mCanvas;
+    public int mSelectIndex = 0;
 
     static public UIController Instance
     {

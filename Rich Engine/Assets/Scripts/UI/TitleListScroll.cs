@@ -8,44 +8,44 @@ using System.Linq;
 public class TitleListScroll : MonoBehaviour
 {
     public List<GameObject> items = new List<GameObject>();
-
     private int mCount = 0;
-    private int mCount1 =15;
-    //RichDataEntry data = new RichDataEntry();
+
+ 
     void Start()
     {
         mCount = 0;
-        
     }
 
     void Update()
     {
-        //if (m_Record == null)
-        //{
-        //    return;
-        //}
-        //if (mCount < m_Record.m_RichList.Count)
-        if (mCount < mCount1)
+        if (mCount < RichEngine.Instance.m_setting.m_LottryTypes.Count)
         {
             //根据item数量改变滚动区域的大小
-            //int count = m_Record.m_RichList.Count;
-            int count = mCount1;
-            transform.GetComponent<RectTransform>().sizeDelta = new Vector2(200 * count,0);
-            for (int i = 0; i < count; i++)
+            transform.GetComponent<RectTransform>().sizeDelta = new Vector2(200 * RichEngine.Instance.m_setting.m_LottryTypes.Count, 0);
+            //for (int i = 0; i < RichEngine.Instance.m_setting.m_LottryTypes.Count; i++)
+            //{
+            //    if (i >= 10)
+            //    {
+            //        break;
+            //    }
+            //    items[i].SetActive(true);
+            //    items[i].GetComponent<TitleItemUI>().SetItemData(i);
+            //}
+            int index = -1;
+            foreach (var lottryType in RichEngine.Instance.m_setting.m_LottryTypes)
             {
-                if (i >= 10)
+                index++;
+                if (index >= 10)
                 {
                     break;
                 }
-                items[i].SetActive(true);
-                items[i].GetComponent<TitleItemUI>().SetItemData(i);
+                items[index].SetActive(true);
+                items[index].GetComponent<TitleItemUI>().SetItemData(index, lottryType.Key);
             }
-
-
-            mCount = count;
+            mCount = RichEngine.Instance.m_setting.m_LottryTypes.Count;
         }
 
-        if (mCount1 > 10)
+        if (RichEngine.Instance.m_setting.m_LottryTypes.Count > 10)
         {
             if (items[0].transform.position.x >= 100)//从左向右滑
             {
@@ -63,12 +63,12 @@ public class TitleListScroll : MonoBehaviour
 
                 items.RemoveAt(items.Count - 1);//将之前最后元素删除
 
-                items[0].GetComponent<TitleItemUI>().SetItemData(index);
+                items[0].GetComponent<TitleItemUI>().SetItemData(index,returnKey(index));
             }
             if (items[0].transform.position.x <= -100)//从右向左滑
             {
                 int index = items[items.Count - 1].GetComponent<TitleItemUI>().m_index + 1;//首先判断是否为最后，是的话就表示显示完了，不需要换位置了
-                if (index >= mCount1)
+                if (index >= RichEngine.Instance.m_setting.m_LottryTypes.Count)
                 {
                     return;
                 }
@@ -82,9 +82,25 @@ public class TitleListScroll : MonoBehaviour
 
                 items.RemoveAt(0);//将之前最前面的元素删除；
 
-                items[items.Count - 1].GetComponent<TitleItemUI>().SetItemData(index);
+                items[items.Count - 1].GetComponent<TitleItemUI>().SetItemData(index, returnKey(index));
             }
         }
     }
+
+    public string returnKey(int index)
+    {
+        string key = "";
+        int _index = -1;
+        foreach (var lottryType in RichEngine.Instance.m_setting.m_LottryTypes)
+        {
+            _index++;
+            if (index == _index)
+            {
+                key = lottryType.Key;
+            }
+        }
+        return key;
+    }
+    
 }
 

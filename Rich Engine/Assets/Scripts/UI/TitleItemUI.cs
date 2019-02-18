@@ -10,29 +10,32 @@ public class TitleItemUI : MonoBehaviour
 {
 
 	private Text txt_LotteryType;
+	private Toggle tog_LotteryType;
 
 	public int m_index = -1;
-    //RichDataEntry m_richDataEntry;
-
 
     void Awake()
 	{
         txt_LotteryType = transform.Find ("txt_LotteryType").GetComponent<Text>();
-        GetComponent<Toggle>().onValueChanged.AddListener(Toggleclick);
+        tog_LotteryType = GetComponent<Toggle>();
+        tog_LotteryType.onValueChanged.AddListener(Toggleclick);
 
     }
 
-    public void SetItemData(int index)
+    public void SetItemData(int index,string type)
     {
-        //m_richDataEntry = data;
         m_index = index;
-        txt_LotteryType.text = index.ToString();
-        
+        txt_LotteryType.text = type;
+        if (m_index == UIController.Instance.mSelectIndex)
+            tog_LotteryType.isOn = true;
+        else
+            tog_LotteryType.isOn = false;
+
     }
 
     private void Toggleclick(bool arg)
     {
-        Debug.Log("this is Toggle click");
-        Debug.Log(arg);
+        if (arg)
+            UIController.Instance.mSelectIndex = m_index;
     }
 }

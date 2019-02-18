@@ -8,40 +8,25 @@ using System.Linq;
 public class ListScroll : MonoBehaviour
 {
     public List<GameObject> items = new List<GameObject>();
-
     private int mCount = 0;
-    RichLotteryRecord m_Record;
-    RichDataEntry data = new RichDataEntry();
+    RichArchieve mArchieve;
 
     void Start()
     {
         mCount = 0;
-        //m_Record = ((List<RichLotteryRecord>)RichEngine.Instance.m_dataCenter.GetQueryArchieve().m_RecordsList)[0];
-        m_Record = RichEngine.Instance.m_dataCenter.GetRecordOf("超级大乐透");
-        if (m_Record == null)
-        {
-            RichEngine.Instance.m_dataCenter.CreateNewRecord("超级大乐透");
-            m_Record = RichEngine.Instance.m_dataCenter.GetRecordOf("超级大乐透");
-        }
-        //m_Record = RichEngine.Instance.m_dataCenter.GetRecordOf("双色球");
-        //if (m_Record == null)
-        //{
-        //    RichEngine.Instance.m_dataCenter.CreateNewRecord("双色球");
-        //    m_Record = RichEngine.Instance.m_dataCenter.GetRecordOf("双色球");
-        //}
-
+        mArchieve = RichEngine.Instance.m_dataCenter.GetQueryArchieve();
     }
 
     void Update()
     {
-        if (m_Record == null)
+        if (mArchieve.m_RecordsList[UIController.Instance.mSelectIndex] == null)
         {
             return;
         }
-        if (mCount < m_Record.m_RichList.Count)
+        if (mCount < mArchieve.m_RecordsList[UIController.Instance.mSelectIndex].m_RichList.Count)
         {
             //根据item数量改变滚动区域的大小
-            int count = m_Record.m_RichList.Count;
+            int count = mArchieve.m_RecordsList[UIController.Instance.mSelectIndex].m_RichList.Count;
             transform.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 200 * count);
             for (int i = count - 1; i >= 0; i--)
             {
@@ -50,18 +35,18 @@ public class ListScroll : MonoBehaviour
                     break;
                 }
                 items[count - i - 1].SetActive(true);
-                items[count - i - 1].GetComponent<ListItemUI>().SetItemData(m_Record.m_RichList[i], i);
+                items[count - i - 1].GetComponent<ListItemUI>().SetItemData(mArchieve.m_RecordsList[UIController.Instance.mSelectIndex].m_RichList[i], i);
             }
 
             mCount = count;
         }
 
-        if (m_Record.m_RichList.Count > 10)
+        if (mArchieve.m_RecordsList[UIController.Instance.mSelectIndex].m_RichList.Count > 10)
         {
             if (items[0].transform.position.y <= 1660)//从上往下滑
             {
                 int index = items[0].GetComponent<ListItemUI>().m_index + 1;//首先判断是否为第一个元素，是的话就表示显示完了，不需要换位置了
-                if (index >= m_Record.m_RichList.Count)
+                if (index >= mArchieve.m_RecordsList[UIController.Instance.mSelectIndex].m_RichList.Count)
                 {
                     return;
                 }
@@ -75,7 +60,7 @@ public class ListScroll : MonoBehaviour
 
                 items.RemoveAt(items.Count - 1);//将之前最后元素删除
 
-                items[0].GetComponent<ListItemUI>().SetItemData(m_Record.m_RichList[index], index);
+                items[0].GetComponent<ListItemUI>().SetItemData(mArchieve.m_RecordsList[UIController.Instance.mSelectIndex].m_RichList[index], index);
             }
             if (items[0].transform.position.y >= 1860)//从下往上滑
             {
@@ -93,7 +78,7 @@ public class ListScroll : MonoBehaviour
 
                 items.RemoveAt(0);//将之前最前面的元素删除；
 
-                items[items.Count - 1].GetComponent<ListItemUI>().SetItemData(m_Record.m_RichList[index], index);
+                items[items.Count - 1].GetComponent<ListItemUI>().SetItemData(mArchieve.m_RecordsList[UIController.Instance.mSelectIndex].m_RichList[index], index);
             }
         }
     }
