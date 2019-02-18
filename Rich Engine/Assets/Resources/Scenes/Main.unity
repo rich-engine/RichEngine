@@ -1364,7 +1364,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.000061035156}
   m_SizeDelta: {x: 0, y: 200}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &728010751 stripped
@@ -1726,7 +1726,7 @@ MonoBehaviour:
   LotteryType: "\u8D85\u7EA7\u5927\u4E50\u900F"
   queryMaps:
   - QueryAPI: http://www.opencai.net/
-    LotteryLink: http://r.apiplus.net/newly.do?token=af163157a99a04029946e684e27a49d8&code=dlt&rows=50&format=json
+    LotteryLink: http://f.apiplus.net/dlt-20.json
   totalNum: 7
   segments:
   - max: 35
@@ -2669,7 +2669,7 @@ MonoBehaviour:
   LotteryType: "\u53CC\u8272\u7403"
   queryMaps:
   - QueryAPI: http://www.opencai.net/
-    LotteryLink: http://r.apiplus.net/newly.do?token=af163157a99a04029946e684e27a49d8&code=ssq&rows=50&format=json
+    LotteryLink: http://f.apiplus.net/ssq-20.json
   totalNum: 7
   segments:
   - max: 33

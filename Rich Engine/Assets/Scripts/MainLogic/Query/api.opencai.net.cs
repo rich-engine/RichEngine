@@ -72,8 +72,14 @@ public class Query_To_OpenCai :  ILotteryResultQuery
             string url = RichEngine.Instance.GetLotteryQueryLink(lotteryType, GetApiType());
 
             string html = api.HttpGet(url, Encoding.UTF8);
+
+            //Log
+            Debug.Log("数据：" + html);
+
             if (!html.Substring(0, 5).Equals("{\"row", StringComparison.OrdinalIgnoreCase))
                 throw new Exception(html);
+
+
 
             JsonData json = JsonMapper.ToObject(html);
             m_resultEntryMap.Clear();
