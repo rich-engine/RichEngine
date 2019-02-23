@@ -33,15 +33,20 @@ public class KeepUI : MonoBehaviour
     {
         mType = type;
         int totalNum = RichEngine.Instance.m_setting.m_LottryTypes[mType].totalNum;
-        mKeepNumbers = new int[totalNum];
-        for (int i = 0; i < totalNum; i++)
+
+        int index = -1;
+        foreach (var segments in RichEngine.Instance.m_setting.m_LottryTypes[mType].segments)
         {
-            GameObject uiObject = UIController.Instance.CreateObject("UI/input_Keep", img_bg.gameObject);
-            uiObject.transform.localPosition = new Vector3(500-100 * i, 0, 0);
-            uiObject.GetComponent<KeepItemUI>().SetItemData(i, mKeepNumbers);
-            
+            index++;
+            for (int i = 0; i < segments.count; i++)
+            {
+                GameObject uiObject = UIController.Instance.CreateObject("UI/input_Keep", img_bg.gameObject);
+                uiObject.transform.localPosition = new Vector3(200 + 60 * i, 87-80*index, 0);
+                uiObject.GetComponent<KeepItemUI>().SetItemData(i, mKeepNumbers);
+            }
         }
-        
+
+
     }
 
     private void btnSureClick()

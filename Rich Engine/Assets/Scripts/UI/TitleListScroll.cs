@@ -14,6 +14,7 @@ public class TitleListScroll : MonoBehaviour
     void Start()
     {
         mCount = 0;
+        
     }
 
     void Update()
@@ -35,10 +36,14 @@ public class TitleListScroll : MonoBehaviour
             foreach (var lottryType in RichEngine.Instance.m_setting.m_LottryTypes)
             {
                 index++;
+                if(index == 0)
+                    UIController.Instance.mLottryType = lottryType.Key;
                 if (index >= 10)
                 {
                     break;
                 }
+
+                
                 items[index].SetActive(true);
                 items[index].GetComponent<TitleItemUI>().SetItemData(index, lottryType.Key);
             }
