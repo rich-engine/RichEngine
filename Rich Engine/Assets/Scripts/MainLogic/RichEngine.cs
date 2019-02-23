@@ -34,6 +34,8 @@ public class RichEngine : MonoBehaviour {
 
         m_query = LotteryQueryFactory.GetLotteryQuery(m_setting.UseQueryAPI);
 
+        m_timeCount = 0;    //保证第一次的query
+
     }
 
 
@@ -41,9 +43,9 @@ public class RichEngine : MonoBehaviour {
     //设置成 5分钟执行一次 project setting
     void FixedUpdate()
     {
-        m_timeCount += Time.fixedDeltaTime;
-        if (m_timeCount < m_setting.m_QueryInterval) return;
-        m_timeCount -= m_setting.m_QueryInterval;
+        m_timeCount -= Time.fixedDeltaTime;
+        if (m_timeCount > 0 ) return;
+        m_timeCount += m_setting.m_QueryInterval;
 
 
         foreach (var record in m_data.m_RecordsList)
@@ -119,7 +121,7 @@ public class RichEngine : MonoBehaviour {
     }
 
 
-    //根据lotteryType 获取 lotteryLink
+    //根据lotteryType 获取 lotteryLink  //可以读表
     public string GetLotteryQueryLink(string lotteryType,string queryType)
     {
         LotteryTypeSetting set = m_setting.m_LottryTypes[lotteryType];

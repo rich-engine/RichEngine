@@ -10,6 +10,8 @@ public interface ILotteryRule
     void Compare(RichDataEntry data );   //对比是否获奖
 
     RichDataEntry GetNextIssue(RichDataEntry data);  //获得下一期数据  
+
+    bool CheckNumsAvailable(int[] nums);    //判断 号码 符合 规则
 }
 
 

@@ -37,7 +37,7 @@ public class RandomFactory
     }
 
 
-    public Dictionary<string, IRandom>.KeyCollection GetRandomFuncList()
+    public static Dictionary<string, IRandom>.KeyCollection GetRandomFuncList()
     {
         return ms_randMap.Keys;
     }

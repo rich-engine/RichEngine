@@ -83,6 +83,7 @@ public class Query_To_OpenCai :  ILotteryResultQuery
 
             JsonData json = JsonMapper.ToObject(html);
             m_resultEntryMap.Clear();
+            m_lastedIssue = 0;
             foreach (JsonData row in json["data"])
             {
 
