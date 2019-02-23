@@ -14,7 +14,7 @@ public class TitleListScroll : MonoBehaviour
     void Start()
     {
         mCount = 0;
-        
+        UIController.Instance.mLottryType = returnKey(0);
     }
 
     void Update()
