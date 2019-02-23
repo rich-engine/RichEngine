@@ -78,15 +78,19 @@ public class ListItemUI : MonoBehaviour
                 txt_HitLevel_Rand.text = "未开奖";
                 txt_HitLevel_Keep.text = "未开奖";
             }
-            if (m_richDataEntry.m_HitLevel_Rand == -1)
-                txt_HitLevel_Rand.text = "未中奖";
             else
-                txt_HitLevel_Rand.text = m_richDataEntry.m_HitLevel_Rand + "奖";
+            {
+                if (m_richDataEntry.m_HitLevel_Rand == -1)
+                    txt_HitLevel_Rand.text = "未中奖";
+                else
+                    txt_HitLevel_Rand.text = m_richDataEntry.m_HitLevel_Rand + "奖";
 
-            if (m_richDataEntry.m_HitLevel_Keep == -1)
-                txt_HitLevel_Keep.text = "未中奖";
-            else
-                txt_HitLevel_Keep.text = m_richDataEntry.m_HitLevel_Keep + "奖";
+                if (m_richDataEntry.m_HitLevel_Keep == -1)
+                    txt_HitLevel_Keep.text = "未中奖";
+                else
+                    txt_HitLevel_Keep.text = m_richDataEntry.m_HitLevel_Keep + "奖";
+            }
+            
         }
         else
         {
@@ -127,10 +131,11 @@ public class ListItemUI : MonoBehaviour
     public void btnRandomClick()
     {
         GameObject ui = UIController.Instance.CreateObject("UI/RandomUI", UIController.Instance.mCanvas);
-        ui.GetComponent<RandomUI>().SetItemData(m_richDataEntry);
+        ui.GetComponent<RandomUI>().SetItemData(m_richDataEntry, mType);
     }
     public void btnKeepClick()
     {
         GameObject ui = UIController.Instance.CreateObject("UI/KeepUI", UIController.Instance.mCanvas);
+        ui.GetComponent<KeepUI>().SetItemData(mType);
     }
 }

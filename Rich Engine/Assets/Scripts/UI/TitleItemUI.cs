@@ -11,6 +11,7 @@ public class TitleItemUI : MonoBehaviour
 
 	private Text txt_LotteryType;
 	private Toggle tog_LotteryType;
+	private string mLottryType;
 
 	public int m_index = -1;
 
@@ -25,6 +26,7 @@ public class TitleItemUI : MonoBehaviour
     public void SetItemData(int index,string type)
     {
         m_index = index;
+        mLottryType = type; 
         txt_LotteryType.text = type;
         if (m_index == UIController.Instance.mSelectIndex)
             tog_LotteryType.isOn = true;
@@ -36,6 +38,11 @@ public class TitleItemUI : MonoBehaviour
     private void ToggleClick(bool arg)
     {
         if (arg)
+        {
             UIController.Instance.mSelectIndex = m_index;
+            UIController.Instance.mLottryType = mLottryType;
+        }
+            
+
     }
 }

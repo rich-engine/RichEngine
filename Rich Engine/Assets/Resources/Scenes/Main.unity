@@ -718,6 +718,7 @@ MonoBehaviour:
   VERSION: 1.0
   DataSaveFileName: RichData.txt
   UseQueryAPI: http://www.opencai.net/
+  m_QueryInterval: 30
 --- !u!4 &236148941
 Transform:
   m_ObjectHideFlags: 0
@@ -1493,6 +1494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mCanvas: {fileID: 0}
   mSelectIndex: 0
+  mLottryType: 
 --- !u!1 &947065667 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1150886637669076, guid: c60314ccaca2cdd4587d6bf503c6ffa2,

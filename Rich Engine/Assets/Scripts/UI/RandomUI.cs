@@ -12,8 +12,9 @@ public class RandomUI : MonoBehaviour
 	private Button btn_Sure;
 	private Button btn_Cancel;
 	private Button btn_Random;
+    RichDataEntry m_richDataEntry;
 
-	void Awake()
+    void Awake()
 	{
         txt_RandNumbers = transform.Find("img_bg/txt_RandNumbers").GetComponent<Text>();
         btn_Sure = transform.Find("img_bg/btn_Sure").GetComponent<Button>();
@@ -26,8 +27,9 @@ public class RandomUI : MonoBehaviour
         transform.GetComponent<Button>().onClick.AddListener(btnCloseClick);
     }
 
-    public void SetItemData(RichDataEntry data)
+    public void SetItemData(RichDataEntry data,string type)
     {
+        m_richDataEntry = data;
         if (data.m_RandNumbers == null)
             txt_RandNumbers.text = "";
         else
@@ -36,7 +38,9 @@ public class RandomUI : MonoBehaviour
 
     private void btnSureClick()
     {
-
+        int[] dd = new int[] { 1, 2, 3, 15, 5, 6, 7 };
+        RichEngine.Instance.m_dataCenter.SetRandNumbers("超级大乐透", m_richDataEntry.m_Issue, dd);
+        btnCloseClick();
     }
 
     public void btnRandClick()

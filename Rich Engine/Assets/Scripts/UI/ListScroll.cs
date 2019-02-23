@@ -24,20 +24,17 @@ public class ListScroll : MonoBehaviour
 
     void Update()
     {
-        if (mArchieve == null || mArchieve.m_RecordsList == null || mArchieve.m_RecordsList.Count <= 0)
+        if (mArchieve == null || mArchieve.m_RecordsList == null || mArchieve.m_RecordsList.Count <= UIController.Instance.mSelectIndex)
         {
-            return;
-        }
-
-        if (mArchieve.m_RecordsList[UIController.Instance.mSelectIndex] == null)
-        {
+            items[mCount].SetActive(false);
+            RichEngine.Instance.m_dataCenter.CreateNewRecord(UIController.Instance.mLottryType);
             return;
         }
 
         if (mSelectIndex != UIController.Instance.mSelectIndex)
         {
             mSelectIndex = UIController.Instance.mSelectIndex;
-            txt_Keep.text = UIController.Instance.IntConvertString(mArchieve.m_RecordsList[UIController.Instance.mSelectIndex].m_KeepNumbers);
+            //txt_Keep.text = UIController.Instance.IntConvertString(mArchieve.m_RecordsList[UIController.Instance.mSelectIndex].m_KeepNumbers);
         }
 
         if (mCount < mArchieve.m_RecordsList[mSelectIndex].m_RichList.Count)

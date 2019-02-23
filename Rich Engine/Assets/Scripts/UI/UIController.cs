@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour
     static UIController mUIController;
     public GameObject mCanvas;
     public int mSelectIndex = 0;
+    public string mLottryType = "";
 
     static public UIController Instance
     {
