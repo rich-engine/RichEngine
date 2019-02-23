@@ -60,7 +60,7 @@ public class SuperBigLotteryRule : ILotteryRule
         if (data.m_Date.Year < nextData.m_Date.Year)
         {
             int _remainder = nextData.m_Date.Year % 100;
-            nextData.m_Issue = (ulong)_remainder *1000 + 1;
+            nextData.m_Issue = (ulong)_remainder * 1000 + 1;
         }
         else
             nextData.m_Issue = data.m_Issue + 1;
@@ -69,14 +69,14 @@ public class SuperBigLotteryRule : ILotteryRule
 
     }
 
-    private int Winning(int [] compareNumber,int[] lotteryNumbers)
+    private int Winning(int[] compareNumber, int[] lotteryNumbers)
     {
         int[] _beforeCompare = new int[beforeNum];
-        int[] _afterCompare = new int[NumCount- beforeNum];
+        int[] _afterCompare = new int[NumCount - beforeNum];
         int[] _beforeLottery = new int[beforeNum];
-        int[] _afterLottery = new int[NumCount- beforeNum];
+        int[] _afterLottery = new int[NumCount - beforeNum];
 
-        for (int i=0; i < compareNumber.Length;i++)
+        for (int i = 0; i < compareNumber.Length; i++)
         {
             if (i < beforeNum)
             {
@@ -85,15 +85,15 @@ public class SuperBigLotteryRule : ILotteryRule
             }
             else
             {
-                _afterCompare[i- beforeNum] = compareNumber[i];
-                _afterLottery[i- beforeNum] = lotteryNumbers[i];
+                _afterCompare[i - beforeNum] = compareNumber[i];
+                _afterLottery[i - beforeNum] = lotteryNumbers[i];
             }
         }
 
         int _beforeNum = _beforeCompare.Intersect(_afterCompare).ToArray().Length;
         int _afterNum = _afterCompare.Intersect(_afterLottery).ToArray().Length;
 
-        if ((_beforeNum == 0 &&_afterNum == 2)||(_beforeNum == 1 && _afterNum == 2) || (_beforeNum == 2 && _afterNum == 1) || (_beforeNum == 3 && _afterNum == 0))
+        if ((_beforeNum == 0 && _afterNum == 2) || (_beforeNum == 1 && _afterNum == 2) || (_beforeNum == 2 && _afterNum == 1) || (_beforeNum == 3 && _afterNum == 0))
         {
             return 9;
         }
@@ -130,5 +130,10 @@ public class SuperBigLotteryRule : ILotteryRule
             return 1;
         }
         return -1;
+    }
+
+    public bool CheckNumsAvailable(int[] nums)
+    {
+        return true;
     }
 }

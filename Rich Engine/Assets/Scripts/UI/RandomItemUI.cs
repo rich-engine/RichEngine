@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using System;
 
 
-public class TitleItemUI : MonoBehaviour
+public class RandomItemUI : MonoBehaviour
 {
 
 	private Text txt_LotteryType;
@@ -28,21 +28,17 @@ public class TitleItemUI : MonoBehaviour
         m_index = index;
         mLottryType = type; 
         txt_LotteryType.text = type;
-        if (m_index == UIController.Instance.mSelectIndex)
-            tog_LotteryType.isOn = true;
-        else
-            tog_LotteryType.isOn = false;
 
     }
 
     private void ToggleClick(bool arg)
     {
         Debug.Log("====");
-        if (arg)
-        {
-            UIController.Instance.mSelectIndex = m_index;
-            UIController.Instance.mLottryType = mLottryType;
-        }
+        //if (arg)
+        //{
+        //    UIController.Instance.mSelectIndex = m_index;
+        //    UIController.Instance.mLottryType = mLottryType;
+        //}
             
 
     }

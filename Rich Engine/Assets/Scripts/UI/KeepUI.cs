@@ -41,7 +41,8 @@ public class KeepUI : MonoBehaviour
             for (int i = 0; i < segments.count; i++)
             {
                 GameObject uiObject = UIController.Instance.CreateObject("UI/input_Keep", img_bg.gameObject);
-                uiObject.transform.localPosition = new Vector3(200 + 60 * i, 87-80*index, 0);
+                uiObject.transform.localPosition = new Vector3(200 + 80 * i, 300-80*index, 0);
+                Debug.Log("localPosition" + uiObject.transform.localPosition); 
                 uiObject.GetComponent<KeepItemUI>().SetItemData(i, mKeepNumbers);
             }
         }

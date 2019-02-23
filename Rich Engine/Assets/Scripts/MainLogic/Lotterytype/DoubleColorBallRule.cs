@@ -118,4 +118,9 @@ public class DoubleColorBallRule : ILotteryRule
         }
         return -1;
     }
+
+    public bool CheckNumsAvailable(int[] nums)
+    {
+        return true;
+    }
 }
