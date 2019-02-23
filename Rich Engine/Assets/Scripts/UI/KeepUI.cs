@@ -5,13 +5,11 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 
-
 public class KeepUI : MonoBehaviour
 {
 	private Button btn_Sure;
 	private Button btn_Cancel;
 	private Image img_bg;
-    string mType;
     int[] mKeepNumbers;
 
 	void Awake()
@@ -29,21 +27,22 @@ public class KeepUI : MonoBehaviour
 
     }
 
-    public void SetItemData(string type)
+    public void SetItemData()
     {
-        mType = type;
-        int totalNum = RichEngine.Instance.m_setting.m_LottryTypes[mType].totalNum;
-
+        int totalNum = RichEngine.Instance.m_setting.m_LottryTypes[UIController.Instance.mLottryType].totalNum;
+        mKeepNumbers = new int[totalNum];
         int index = -1;
-        foreach (var segments in RichEngine.Instance.m_setting.m_LottryTypes[mType].segments)
+        int row = -1;
+        foreach (var segments in RichEngine.Instance.m_setting.m_LottryTypes[UIController.Instance.mLottryType].segments)
         {
-            index++;
+            row++;
             for (int i = 0; i < segments.count; i++)
             {
+                index++;
                 GameObject uiObject = UIController.Instance.CreateObject("UI/input_Keep", img_bg.gameObject);
-                uiObject.transform.localPosition = new Vector3(200 + 80 * i, 300-80*index, 0);
-                Debug.Log("localPosition" + uiObject.transform.localPosition); 
-                uiObject.GetComponent<KeepItemUI>().SetItemData(i, mKeepNumbers);
+                uiObject.transform.localPosition = new Vector3(200 + 80 * i, 300-80* row, 0);
+                //Debug.Log("localPosition" + uiObject.transform.localPosition); 
+                uiObject.GetComponent<KeepItemUI>().SetItemData(index, mKeepNumbers);
             }
         }
 
@@ -52,8 +51,21 @@ public class KeepUI : MonoBehaviour
 
     private void btnSureClick()
     {
-        RichEngine.Instance.m_dataCenter.SetKeepNumbers(mType, mKeepNumbers);
-        btnCloseClick();
+       
+        var rule = LotteryRuleFactory.GetLotteryRule(UIController.Instance.mLottryType);
+        int[] nums = rule.CheckNumsAvailable(mKeepNumbers);
+        if (nums != null)
+        {
+            UIController.Instance.mTextKeep.text = "守号号码：" + nums;
+            RichEngine.Instance.m_dataCenter.SetKeepNumbers(UIController.Instance.mLottryType, nums);
+            btnCloseClick();
+        }           
+        else
+        {
+            GameObject uiObject = UIController.Instance.CreateObject("UI/Tip", UIController.Instance.mCanvas);
+            uiObject.GetComponent<Tip>().setTip("输入号码规则不对", 3);
+        }
+            
     }
 
     

@@ -994,6 +994,7 @@ GameObject:
   - component: {fileID: 114974084063469222}
   - component: {fileID: 114351674302903982}
   - component: {fileID: 114436470946771428}
+  - component: {fileID: 114195567764482430}
   m_Layer: 5
   m_Name: RandomUI
   m_TagString: Untagged
@@ -1250,7 +1251,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114734863034280322}
   toggleTransition: 1
   graphic: {fileID: 114778178065130700}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 114195567764482430}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1505,6 +1506,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_index: 0
+--- !u!114 &114195567764482430
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1780273628597622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1184210157, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AllowSwitchOff: 0
 --- !u!114 &114196070379141600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2079,7 +2092,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114723162780275654}
   toggleTransition: 1
   graphic: {fileID: 114142857631665770}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 114195567764482430}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2332,7 +2345,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114202130703865300}
   toggleTransition: 1
   graphic: {fileID: 114620277082874476}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 114195567764482430}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2462,7 +2475,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114929708380010880}
   toggleTransition: 1
   graphic: {fileID: 114161639385171300}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 114195567764482430}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2594,7 +2607,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114787934622615190}
   toggleTransition: 1
   graphic: {fileID: 114471459973645578}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 114195567764482430}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2693,7 +2706,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114647517305386182}
   toggleTransition: 1
   graphic: {fileID: 114232612767008286}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 114195567764482430}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2970,7 +2983,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114177695739804706}
   toggleTransition: 1
   graphic: {fileID: 114514566283464586}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 114195567764482430}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3054,13 +3067,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114939556832062612}
   toggleTransition: 1
   graphic: {fileID: 114409650824084456}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 114195567764482430}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!114 &114803528893221586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3132,7 +3145,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114879336148166970}
   toggleTransition: 1
   graphic: {fileID: 114110449232154222}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 114195567764482430}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3576,7 +3589,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114399692125698772}
   toggleTransition: 1
   graphic: {fileID: 114656197876951688}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 114195567764482430}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4521,8 +4534,8 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1080, y: 1920}
   m_Pivot: {x: 0.5, y: 0.5}

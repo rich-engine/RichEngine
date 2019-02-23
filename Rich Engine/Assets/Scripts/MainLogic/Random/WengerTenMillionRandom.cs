@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-
 public class WengerTenMillionRandom : IRandom
 {
 
@@ -45,8 +44,15 @@ public class WengerTenMillionRandom : IRandom
         for (int i = 0; i < result.Length; i++)
         {
             int randomNum = ran.Next(min, max);
+
+
             if (Array.IndexOf(result, randomNum) == -1)
-                result[i] = ran.Next(min, max);
+            {
+                result[i] = randomNum;
+            }
+            else
+                i--;
+               
         }
         
         Array.Sort(result);

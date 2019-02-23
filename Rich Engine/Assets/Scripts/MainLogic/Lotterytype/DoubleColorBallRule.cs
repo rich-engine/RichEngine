@@ -5,8 +5,8 @@ using System.Linq;
 
 public class DoubleColorBallRule : ILotteryRule
 {
-    int NumCount = 7;
-    int beforeNum = 6;
+    int mNumCount = 7;
+    int mBeforeNum = 6;
 
 
     public static void Toggle()
@@ -71,22 +71,22 @@ public class DoubleColorBallRule : ILotteryRule
 
     private int Winning(int [] compareNumber,int[] lotteryNumbers)
     {
-        int[] _beforeCompare = new int[beforeNum];
-        int[] _afterCompare = new int[NumCount- beforeNum];
-        int[] _beforeLottery = new int[beforeNum];
-        int[] _afterLottery = new int[NumCount- beforeNum];
+        int[] _beforeCompare = new int[mBeforeNum];
+        int[] _afterCompare = new int[mNumCount - mBeforeNum];
+        int[] _beforeLottery = new int[mBeforeNum];
+        int[] _afterLottery = new int[mNumCount - mBeforeNum];
 
         for (int i=0; i < compareNumber.Length;i++)
         {
-            if (i < beforeNum)
+            if (i < mBeforeNum)
             {
                 _beforeCompare[i] = compareNumber[i];
                 _beforeLottery[i] = lotteryNumbers[i];
             }
             else
             {
-                _afterCompare[i- beforeNum] = compareNumber[i];
-                _afterLottery[i- beforeNum] = lotteryNumbers[i];
+                _afterCompare[i- mBeforeNum] = compareNumber[i];
+                _afterLottery[i- mBeforeNum] = lotteryNumbers[i];
             }
         }
         int _beforeNum = _beforeCompare.Intersect(_afterCompare).ToArray().Length;
@@ -108,19 +108,63 @@ public class DoubleColorBallRule : ILotteryRule
         {
             return 3;
         }
-        else if (_beforeNum == beforeNum && _afterNum == 0)
+        else if (_beforeNum == mBeforeNum && _afterNum == 0)
         {
             return 2;
         }
-        else if (_beforeNum == beforeNum && _afterNum == NumCount- beforeNum)
+        else if (_beforeNum == mBeforeNum && _afterNum == mNumCount - mBeforeNum)
         {
             return 1;
         }
         return -1;
     }
 
-    public bool CheckNumsAvailable(int[] nums)
+    public int[] CheckNumsAvailable(int[] nums)
     {
-        return true;
+        int _beforeMaxNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[0].max;
+        int _afterMaxNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[1].max;
+        int _beforeMinNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[0].min;
+        int _afterMinNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[1].min;
+
+
+        int[] _beforeLottery = new int[mBeforeNum];
+        int[] _afterLottery = new int[mNumCount - mBeforeNum];
+
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (i < mBeforeNum)
+            {
+                _beforeLottery[i] = nums[i];
+            }
+            else
+            {
+                _afterLottery[i - mBeforeNum] = nums[i];
+            }
+        }
+
+        for (int i = 0; i < _beforeLottery.Length; i++)
+        {
+            if (_beforeLottery[i] < _beforeMinNum && _beforeLottery[i] > _beforeMaxNum)
+                return null;
+        }
+
+        for (int i = 0; i < _afterLottery.Length; i++)
+        {
+            if (_afterLottery[i] < _afterMinNum && _afterLottery[i] > _afterMaxNum)
+                return null;
+        }
+
+        if (UIController.Instance.IsRepeat(_beforeLottery))
+            return null;
+
+        if (UIController.Instance.IsRepeat(_afterLottery))
+            return null;
+
+        Array.Sort(_beforeLottery);
+        Array.Sort(_afterLottery);
+
+        int[] sortNum = _beforeLottery.Concat(_afterLottery).ToArray();
+
+        return sortNum;
     }
 }

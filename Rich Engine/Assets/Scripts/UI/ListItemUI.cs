@@ -9,26 +9,25 @@ using System;
 public class ListItemUI : MonoBehaviour
 {
 
-	private Text txt_Issue;
-	private Text txt_Data;
-	private Text txt_KeepNunbers;
-	private Text txt_LotteryNumbers;
-	private Text txt_RandNumbers;
-	private Text txt_HitLevel_Rand;
-	private Text txt_HitLevel_Keep;
-	private Button btn_Details;
+    private Text txt_Issue;
+    private Text txt_Data;
+    private Text txt_KeepNunbers;
+    private Text txt_LotteryNumbers;
+    private Text txt_RandNumbers;
+    private Text txt_HitLevel_Rand;
+    private Text txt_HitLevel_Keep;
+    private Button btn_Details;
     private Button btn_Keep;
     private Button btn_Random;
     private Toggle tog_hasBuy;
 
-	public int m_index = -1;
-    string mType;
+    public int m_index = -1;
     RichDataEntry m_richDataEntry;
 
 
     void Awake()
-	{
-        txt_Issue = transform.Find ("txt_Issue").GetComponent<Text>();
+    {
+        txt_Issue = transform.Find("txt_Issue").GetComponent<Text>();
         txt_Data = transform.Find("txt_Data").GetComponent<Text>();
         txt_KeepNunbers = transform.Find("txt_KeepNunbers").GetComponent<Text>();
         txt_LotteryNumbers = transform.Find("txt_LotteryNumbers").GetComponent<Text>();
@@ -45,11 +44,10 @@ public class ListItemUI : MonoBehaviour
         btn_Keep.onClick.AddListener(btnKeepClick);
     }
 
-    public void SetItemData(RichDataEntry data, int index,string type)
+    public void SetItemData(RichDataEntry data, int index)
     {
         m_richDataEntry = data;
         m_index = index;
-        mType = type;
         txt_Issue.text = "第" + m_richDataEntry.m_Issue.ToString() + "期";
         txt_Data.text = m_richDataEntry.m_Date.ToString() + "开奖";
         if (m_richDataEntry.m_KeepNumbers == null)
@@ -71,8 +69,6 @@ public class ListItemUI : MonoBehaviour
 
         if (m_richDataEntry.m_hasBuy)
         {
-            tog_hasBuy.enabled = false;
-
             if (!m_richDataEntry.m_hasResult)
             {
                 txt_HitLevel_Rand.text = "未开奖";
@@ -90,7 +86,7 @@ public class ListItemUI : MonoBehaviour
                 else
                     txt_HitLevel_Keep.text = m_richDataEntry.m_HitLevel_Keep + "奖";
             }
-            
+
         }
         else
         {
@@ -99,7 +95,7 @@ public class ListItemUI : MonoBehaviour
             tog_hasBuy.enabled = true;
         }
 
-        if (m_richDataEntry.m_hasResult || m_richDataEntry.m_isExpired)
+        if (m_richDataEntry.m_hasResult || m_richDataEntry.m_isExpired || m_richDataEntry.m_hasBuy)
         {
             tog_hasBuy.enabled = false;
             btn_Details.enabled = false;
@@ -119,7 +115,7 @@ public class ListItemUI : MonoBehaviour
     private void ToggleClick(bool arg)
     {
         if (arg)
-            RichEngine.Instance.m_dataCenter.SetBuy(mType, m_richDataEntry.m_Issue);
+            RichEngine.Instance.m_dataCenter.SetBuy(UIController.Instance.mLottryType, m_richDataEntry.m_Issue);
     }
 
     public void btnDetailsClick()
@@ -131,11 +127,11 @@ public class ListItemUI : MonoBehaviour
     public void btnRandomClick()
     {
         GameObject ui = UIController.Instance.CreateObject("UI/RandomUI", UIController.Instance.mCanvas);
-        ui.GetComponent<RandomUI>().SetItemData(m_richDataEntry, mType);
+        ui.GetComponent<RandomUI>().SetItemData(m_richDataEntry);
     }
     public void btnKeepClick()
     {
         GameObject ui = UIController.Instance.CreateObject("UI/KeepUI", UIController.Instance.mCanvas);
-        ui.GetComponent<KeepUI>().SetItemData(mType);
+        ui.GetComponent<KeepUI>().SetItemData();
     }
 }

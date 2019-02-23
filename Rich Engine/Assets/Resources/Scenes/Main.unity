@@ -1493,7 +1493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCanvas: {fileID: 0}
-  mSelectIndex: 0
+  mTextKeep: {fileID: 0}
   mLottryType: 
 --- !u!1 &947065667 stripped
 GameObject:
@@ -3736,10 +3736,10 @@ Prefab:
       propertyPath: m_Name
       value: TitleItem_0
       objectReference: {fileID: 0}
-    - target: {fileID: 114217859549229562, guid: a964695bd12b4c147880ca61ae5ebb0f,
+    - target: {fileID: 114794735792561700, guid: a964695bd12b4c147880ca61ae5ebb0f,
         type: 2}
-      propertyPath: m_Text
-      value: 
+      propertyPath: m_IsOn
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a964695bd12b4c147880ca61ae5ebb0f, type: 2}

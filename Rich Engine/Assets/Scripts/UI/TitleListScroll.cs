@@ -14,7 +14,6 @@ public class TitleListScroll : MonoBehaviour
     void Start()
     {
         mCount = 0;
-        UIController.Instance.mLottryType = returnKey(0);
     }
 
     void Update()
@@ -23,21 +22,12 @@ public class TitleListScroll : MonoBehaviour
         {
             //根据item数量改变滚动区域的大小
             transform.GetComponent<RectTransform>().sizeDelta = new Vector2(200 * RichEngine.Instance.m_setting.m_LottryTypes.Count, 0);
-            //for (int i = 0; i < RichEngine.Instance.m_setting.m_LottryTypes.Count; i++)
-            //{
-            //    if (i >= 10)
-            //    {
-            //        break;
-            //    }
-            //    items[i].SetActive(true);
-            //    items[i].GetComponent<TitleItemUI>().SetItemData(i);
-            //}
+
             int index = -1;
             foreach (var lottryType in RichEngine.Instance.m_setting.m_LottryTypes)
             {
                 index++;
-                if(index == 0)
-                    UIController.Instance.mLottryType = lottryType.Key;
+
                 if (index >= 10)
                 {
                     break;
@@ -68,7 +58,7 @@ public class TitleListScroll : MonoBehaviour
 
                 items.RemoveAt(items.Count - 1);//将之前最后元素删除
 
-                items[0].GetComponent<TitleItemUI>().SetItemData(index,returnKey(index));
+                items[0].GetComponent<TitleItemUI>().SetItemData(index,UIController.Instance.getLottryType(index));
             }
             if (items[0].transform.position.x <= -100)//从右向左滑
             {
@@ -87,25 +77,10 @@ public class TitleListScroll : MonoBehaviour
 
                 items.RemoveAt(0);//将之前最前面的元素删除；
 
-                items[items.Count - 1].GetComponent<TitleItemUI>().SetItemData(index, returnKey(index));
+                items[items.Count - 1].GetComponent<TitleItemUI>().SetItemData(index, UIController.Instance.getLottryType(index));
             }
         }
     }
 
-    public string returnKey(int index)
-    {
-        string key = "";
-        int _index = -1;
-        foreach (var lottryType in RichEngine.Instance.m_setting.m_LottryTypes)
-        {
-            _index++;
-            if (index == _index)
-            {
-                key = lottryType.Key;
-            }
-        }
-        return key;
-    }
-    
 }
 

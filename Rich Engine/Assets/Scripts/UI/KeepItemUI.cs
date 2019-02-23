@@ -8,11 +8,6 @@ using System;
 
 public class KeepItemUI : MonoBehaviour
 {
-
-	private Text txt_LotteryType;
-	private Toggle tog_LotteryType;
-	private string mLottryType;
-
 	public int m_index = -1;
     int[] mKeepNumbers;
 

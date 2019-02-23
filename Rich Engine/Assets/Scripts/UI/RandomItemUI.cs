@@ -12,8 +12,8 @@ public class RandomItemUI : MonoBehaviour
 	private Text txt_LotteryType;
 	private Toggle tog_LotteryType;
 	private string mLottryType;
-
 	public int m_index = -1;
+    RandomUI mRandomUI;
 
     void Awake()
 	{
@@ -23,23 +23,22 @@ public class RandomItemUI : MonoBehaviour
 
     }
 
-    public void SetItemData(int index,string type)
+    public void SetItemData(int index,string type, RandomUI _randomUI)
     {
         m_index = index;
         mLottryType = type; 
         txt_LotteryType.text = type;
-
+        mRandomUI = _randomUI;
     }
 
     private void ToggleClick(bool arg)
     {
-        Debug.Log("====");
         //if (arg)
         //{
         //    UIController.Instance.mSelectIndex = m_index;
         //    UIController.Instance.mLottryType = mLottryType;
         //}
-            
 
+        mRandomUI.setRandomText(mLottryType);
     }
 }

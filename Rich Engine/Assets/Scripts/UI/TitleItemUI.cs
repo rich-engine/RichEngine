@@ -28,7 +28,7 @@ public class TitleItemUI : MonoBehaviour
         m_index = index;
         mLottryType = type; 
         txt_LotteryType.text = type;
-        if (m_index == UIController.Instance.mSelectIndex)
+        if (type == UIController.Instance.mLottryType)
             tog_LotteryType.isOn = true;
         else
             tog_LotteryType.isOn = false;
@@ -37,10 +37,8 @@ public class TitleItemUI : MonoBehaviour
 
     private void ToggleClick(bool arg)
     {
-        Debug.Log("====");
         if (arg)
         {
-            UIController.Instance.mSelectIndex = m_index;
             UIController.Instance.mLottryType = mLottryType;
         }
             
