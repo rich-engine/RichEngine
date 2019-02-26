@@ -290,7 +290,7 @@ public class RichDataManager
 
 
     //设置随机号
-    public void SetRandNumbers(string lotteryType, ulong issue, int[] nums)
+    public void SetRandNumbers(string lotteryType, ulong issue, int[] nums,string randAlgothm)
     {
         var rec = GetRecordOf(lotteryType);
 
@@ -310,7 +310,7 @@ public class RichDataManager
         }
 
         entry.m_RandNumbers = nums;
-
+        entry.m_RandAlgothm = randAlgothm;
         //保存
         SaveData();
     }

@@ -89,7 +89,7 @@ public class DoubleColorBallRule : ILotteryRule
                 _afterLottery[i- mBeforeNum] = lotteryNumbers[i];
             }
         }
-        int _beforeNum = _beforeCompare.Intersect(_afterCompare).ToArray().Length;
+        int _beforeNum = _beforeCompare.Intersect(_beforeLottery).ToArray().Length;
         int _afterNum = _afterCompare.Intersect(_afterLottery).ToArray().Length;
 
         if ((_beforeNum == 2 &&_afterNum == 1)||(_beforeNum == 1 && _afterNum == 1) || (_beforeNum == 0 && _afterNum == 1))

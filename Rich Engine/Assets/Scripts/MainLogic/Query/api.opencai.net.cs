@@ -126,7 +126,9 @@ public class Query_To_OpenCai :  ILotteryResultQuery
             entry.m_LotteryNumbers[i] = int.Parse(strArr[i]);
         }
 
-        entry.m_Date = JsonMapper.ToObject<DateTime>(result["opentime"].ToJson());
+        //entry.m_Date = JsonMapper.ToObject<DateTime>(result["opentime"].ToJson());
+        entry.m_Date = DateTime.Parse(result["opentime"].ToString());
+
         entry.m_hasResult = true;
 
     }

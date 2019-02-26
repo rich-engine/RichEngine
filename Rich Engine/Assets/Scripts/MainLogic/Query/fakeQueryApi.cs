@@ -35,8 +35,11 @@ public class fakeQueryApi : ILotteryResultQuery {
     Dictionary<ulong, JsonData> m_resultEntryMap;
     ulong m_lastedIssue;
 
+    string m_curType;
     public bool GetData(string lotteryType)
     {
+        m_curType = lotteryType;
+
         m_resultEntryMap.Clear();
         m_lastedIssue = 0;
         foreach (var lottery in FakeQueryData.Instance.lotteries)
@@ -80,7 +83,11 @@ public class fakeQueryApi : ILotteryResultQuery {
             entry.m_LotteryNumbers[i] = int.Parse(strArr[i]);
         }
 
-        entry.m_Date = JsonMapper.ToObject<DateTime>(result["opentime"].ToJson());
+        entry.m_Date = DateTime.Parse(result["opentime"].ToString());
+
+        ILotteryRule rule = LotteryRuleFactory.GetLotteryRule(m_curType);
+        rule.Compare(entry);
+
         entry.m_hasResult = true;
     }
 
