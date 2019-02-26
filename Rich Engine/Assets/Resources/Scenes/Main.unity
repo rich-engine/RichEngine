@@ -717,7 +717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VERSION: 1.0
   DataSaveFileName: RichData.txt
-  UseQueryAPI: Faker
+  UseQueryAPI: http://www.opencai.net/
   m_QueryInterval: 30
 --- !u!4 &236148941
 Transform:
@@ -1365,7 +1365,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.000061035156}
   m_SizeDelta: {x: 0, y: 200}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &728010751 stripped
@@ -1768,13 +1768,17 @@ MonoBehaviour:
   - type: "\u8D85\u7EA7\u5927\u4E50\u900F"
     lastestIssue: 1
     results:
-    - '{"expect":"2019021","opencode":"07,13,17,24,33+01,10","opentime":"2019-02-25
-      20:33:20","opentimestamp":1551098000}'
+    - '{"expect":"2019019","opencode":"04,11,19,25,32+01,02","opentime":"2019-02-20
+      20:33:20","opentimestamp":1550666000}'
+    - '{"expect":"2019020","opencode":"01,08,16,27,34+03,12","opentime":"2019-02-23
+      20:33:20","opentimestamp":1550925200}'
   - type: "\u53CC\u8272\u7403"
     lastestIssue: 1
     results:
-    - '{"expect":"2019021","opencode":"02,05,07,08,20,27+04","opentime":"2019-02-24
-      21:18:20","opentimestamp":1551014300}'
+    - '{"expect":"2019020","opencode":"02,12,13,23,27,28+12","opentime":"2019-02-21
+      21:18:20","opentimestamp":1550755100}'
+    - '{"expect":"2019019","opencode":"03,11,17,18,24,25+06","opentime":"2019-02-19
+      21:18:20","opentimestamp":1550582300}'
 --- !u!4 &1151387821
 Transform:
   m_ObjectHideFlags: 0
