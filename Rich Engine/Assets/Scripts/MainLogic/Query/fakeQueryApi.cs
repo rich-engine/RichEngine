@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using LitJson;
 public class fakeQueryApi : ILotteryResultQuery {
 
     public static void Toggle()
@@ -17,7 +18,7 @@ public class fakeQueryApi : ILotteryResultQuery {
 
     private fakeQueryApi()
     {
-        
+        m_resultEntryMap = new Dictionary<ulong, JsonData>();
     }
 
     public string GetApiType()
@@ -31,14 +32,28 @@ public class fakeQueryApi : ILotteryResultQuery {
     }
 
 
-    FakeQueryData.FakeLotteryResult m_data;
+    Dictionary<ulong, JsonData> m_resultEntryMap;
+    ulong m_lastedIssue;
+
     public bool GetData(string lotteryType)
     {
-        foreach(var lottery in FakeQueryData.Instance.lotteries)
+        m_resultEntryMap.Clear();
+        m_lastedIssue = 0;
+        foreach (var lottery in FakeQueryData.Instance.lotteries)
         {
             if(lottery.type == lotteryType)
             {
-                m_data = lottery;
+                foreach(var rst in lottery.results)
+                {
+                    JsonData json = JsonMapper.ToObject(rst);
+
+                    ulong issue = ulong.Parse(json["expect"].ToString());
+
+                    m_resultEntryMap.Add(issue, json);
+
+                    m_lastedIssue = Math.Max(m_lastedIssue, issue);
+                }
+
                 return true;
             }
         }
@@ -47,48 +62,52 @@ public class fakeQueryApi : ILotteryResultQuery {
 
     public void QueryLotteryEntry(RichDataEntry entry)
     {
-        if(m_data.lastestIssue < entry.m_Issue)
+        JsonData result;
+        if (!m_resultEntryMap.TryGetValue(entry.m_Issue, out result))
         {
+            if (m_lastedIssue > entry.m_Issue)
+            {
+                entry.m_isExpired = true;
+            }
             return;
         }
 
 
-       foreach(var e in m_data.results)
-       {
-            if(e.Issue == entry.m_Issue)
-            {
-                entry.m_LotteryNumbers = e.Result;
-                entry.m_Date = DateTime.Parse(e.Time);
-                entry.m_hasResult = true;
-                return;
-            }
-       }
+        string[] strArr = result["opencode"].ToString().Replace('+', ',').Split(',');
+        entry.m_LotteryNumbers = new int[strArr.Length];
+        for (int i = 0; i < strArr.Length; i++)
+        {
+            entry.m_LotteryNumbers[i] = int.Parse(strArr[i]);
+        }
 
-        entry.m_isExpired = true;
-        return;
+        entry.m_Date = JsonMapper.ToObject<DateTime>(result["opentime"].ToJson());
+        entry.m_hasResult = true;
     }
 
     public RichDataEntry GetLatestIssueInfo()
     {
         RichDataEntry entry = new RichDataEntry();
 
-        foreach (var e in m_data.results)
+        JsonData lastedResult = m_resultEntryMap[m_lastedIssue];
+
+        entry.m_Issue = ulong.Parse(lastedResult["expect"].ToString());
+
+        string[] strArr = lastedResult["opencode"].ToString().Replace('+', ',').Split(',');
+        entry.m_LotteryNumbers = new int[strArr.Length];
+        for (int i = 0; i < strArr.Length; i++)
         {
-            if (e.Issue == m_data.lastestIssue)
-            {
-                entry.m_Issue = e.Issue;
-                entry.m_LotteryNumbers = e.Result;
-                entry.m_Date = DateTime.Parse(e.Time);
-                entry.m_hasResult = true;
-                break;
-            }
+            entry.m_LotteryNumbers[i] = int.Parse(strArr[i]);
         }
+
+        //entry.m_Date = JsonMapper.ToObject<DateTime>(lastedResult["opentime"].ToJson());
+        entry.m_Date = DateTime.Parse(lastedResult["opentime"].ToString());
+        entry.m_hasResult = true;
 
         return entry;
     }
 
     public ulong GetLastestIssueNo()
     {
-        return m_data.lastestIssue;
+        return m_lastedIssue;
     }
 }

@@ -118,7 +118,14 @@ public class Query_To_OpenCai :  ILotteryResultQuery
             return;
         }
 
-        entry.m_LotteryNumbers = JsonMapper.ToObject<int[]>(result["opencode"].ToJson());
+
+        string[] strArr = result["opencode"].ToString().Replace('+', ',').Split(',');
+        entry.m_LotteryNumbers = new int[strArr.Length];
+        for (int i = 0; i < strArr.Length; i++)
+        {
+            entry.m_LotteryNumbers[i] = int.Parse(strArr[i]);
+        }
+
         entry.m_Date = JsonMapper.ToObject<DateTime>(result["opentime"].ToJson());
         entry.m_hasResult = true;
 

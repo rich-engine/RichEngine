@@ -16,15 +16,9 @@ public class FakeQueryData : MonoBehaviour {
     {
         public string type;
         public ulong lastestIssue;
-        public FakeEntry[] results;
+        public string[] results;
     }
-    [System.Serializable]
-    public class FakeEntry
-    {
-        public ulong Issue;
-        public int[] Result;
-        public string Time;
-    }
+
 
     public FakeLotteryResult[] lotteries;
     // Use this for initialization

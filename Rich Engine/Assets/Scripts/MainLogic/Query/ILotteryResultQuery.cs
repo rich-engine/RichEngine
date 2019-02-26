@@ -35,7 +35,7 @@ public class LotteryQueryFactory
         //Toggle
 
         Query_To_OpenCai.Toggle();
-
+        fakeQueryApi.Toggle();
     }
 
     public static void Regist(string queryType, ILotteryResultQuery query)

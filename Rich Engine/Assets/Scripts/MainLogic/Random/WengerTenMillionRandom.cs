@@ -25,7 +25,7 @@ public class WengerTenMillionRandom : IRandom
     //获取随机方法名称
     public string GetRandType()
     {
-        return "Wenger的百万随机";
+        return "Wenger的千万随机";
     }
 
 

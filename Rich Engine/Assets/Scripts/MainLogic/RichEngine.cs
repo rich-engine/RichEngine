@@ -77,22 +77,24 @@ public class RichEngine : MonoBehaviour {
         bool hasNew = false;
         foreach(var entry in record.m_RichList)
         {
+            if(entry.m_Issue > query.GetLastestIssueNo())
+            {
+                hasNew = true;
+                continue;
+            }
+
             //没有买 
-            if(!entry.m_hasBuy )
+            if (!entry.m_hasBuy )
             {
                 //并且不是最新一期时候 删除数据
                 if(entry.m_Issue <= query.GetLastestIssueNo())
                 {
                     removeList.Add(entry);
                 }
-                //否则记录一下 有最新
-                else
-                {
-                    hasNew = true;
-                }
                 continue;
             }
 
+           
             //没有超期 并且 没有结果 就查询
             if (!entry.m_isExpired && !entry.m_hasResult)
             {

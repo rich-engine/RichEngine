@@ -42,9 +42,11 @@ public class RichDataEntry {
 
     public DateTime m_Date;    //开奖日期
 
+    public string m_RandAlgothm;//随机算法
+
     public int[] m_RandNumbers; //推荐号码
 
-    public int[] m_KeepNumbers; //推荐号码
+    public int[] m_KeepNumbers; //守号
 
     public int[] m_LotteryNumbers; // 中奖号码
 
@@ -57,6 +59,7 @@ public class RichDataEntry {
     public bool m_hasResult = false;    //是否开奖
 
     public bool m_isExpired = false;    //是否超出查询
+
 
 
     public RichDataEntry()
@@ -270,6 +273,14 @@ public class RichDataManager
 
             return;
         }
+
+        if(entry.m_KeepNumbers == null || entry.m_RandNumbers == null)
+        {
+            //没有号码
+
+            return;
+        }
+
 
         entry.m_hasBuy = true;
 
