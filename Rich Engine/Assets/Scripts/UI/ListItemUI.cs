@@ -79,12 +79,12 @@ public class ListItemUI : MonoBehaviour
                 if (m_richDataEntry.m_HitLevel_Rand == -1)
                     txt_HitLevel_Rand.text = "未中奖";
                 else
-                    txt_HitLevel_Rand.text = m_richDataEntry.m_HitLevel_Rand + "奖";
+                    txt_HitLevel_Rand.text = m_richDataEntry.m_HitLevel_Rand + "等奖";
 
                 if (m_richDataEntry.m_HitLevel_Keep == -1)
                     txt_HitLevel_Keep.text = "未中奖";
                 else
-                    txt_HitLevel_Keep.text = m_richDataEntry.m_HitLevel_Keep + "奖";
+                    txt_HitLevel_Keep.text = m_richDataEntry.m_HitLevel_Keep + "等奖";
             }
 
         }
@@ -114,8 +114,9 @@ public class ListItemUI : MonoBehaviour
 
     private void ToggleClick(bool arg)
     {
-        if (arg)
+        //if (arg)
             RichEngine.Instance.m_dataCenter.SetBuy(UIController.Instance.mLottryType, m_richDataEntry.m_Issue);
+
     }
 
     public void btnDetailsClick()

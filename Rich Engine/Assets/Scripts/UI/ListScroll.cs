@@ -100,7 +100,7 @@ public class ListScroll : MonoBehaviour
 
     void setRecord()
     {
-        if (mRecord == null || mRecord.m_RichList.Count <= 0)
+        if (mRecord == null || mRecord.m_RichList == null || mRecord.m_RichList.Count <= 0)
         {
             items[mCount].SetActive(false);
             RichEngine.Instance.m_dataCenter.CreateNewRecord(UIController.Instance.mLottryType);

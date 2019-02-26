@@ -16,6 +16,7 @@ public class RandomUI : MonoBehaviour
     public List<GameObject> items = new List<GameObject>();
     int mCount = 0;
     int[] randomNumbers;
+    string mRandomType;
 
     void Awake()
 	{
@@ -43,7 +44,7 @@ public class RandomUI : MonoBehaviour
     {
         if (randomNumbers == null)
             return;
-        RichEngine.Instance.m_dataCenter.SetRandNumbers(UIController.Instance.mLottryType, m_richDataEntry.m_Issue, randomNumbers);
+        RichEngine.Instance.m_dataCenter.SetRandNumbers(UIController.Instance.mLottryType, m_richDataEntry.m_Issue, randomNumbers, mRandomType);
         btnCloseClick();
     }
 
@@ -137,6 +138,7 @@ public class RandomUI : MonoBehaviour
 
     public void setRandomText(string type)
     {
+        mRandomType = type;
         randomNumbers = RichEngine.Instance.GetRandNumbers(UIController.Instance.mLottryType, m_richDataEntry.m_Issue, type);
         txt_RandNumbers.text = UIController.Instance.IntConvertString(randomNumbers);
     }
