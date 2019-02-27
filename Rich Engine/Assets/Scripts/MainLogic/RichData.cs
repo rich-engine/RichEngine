@@ -123,7 +123,7 @@ public class RichDataManager
 
     public RichDataManager()
     {
-        m_filePath = Application.persistentDataPath + RichEngine.Instance.m_setting.DataSaveFileName;
+        m_filePath = Application.persistentDataPath +"/"+ RichEngine.Instance.m_setting.DataSaveFileName;
     }
 
     //加载数据
