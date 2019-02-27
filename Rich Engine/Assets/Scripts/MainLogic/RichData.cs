@@ -274,7 +274,7 @@ public class RichDataManager
             return;
         }
 
-        if(entry.m_KeepNumbers == null || entry.m_RandNumbers == null)
+        if(entry.m_KeepNumbers == null && entry.m_RandNumbers == null)
         {
             //没有号码
 
