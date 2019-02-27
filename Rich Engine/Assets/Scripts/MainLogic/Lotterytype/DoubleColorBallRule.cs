@@ -42,7 +42,7 @@ public class DoubleColorBallRule : ILotteryRule
         //throw new NotImplementedException();
         RichDataEntry nextData = new RichDataEntry();
         nextData.m_RandNumbers = null;
-        nextData.m_KeepNumbers = data.m_KeepNumbers;
+        nextData.m_KeepNumbers = RichEngine.Instance.m_dataCenter.GetRecordOf(GetLotteryType()).m_KeepNumbers;
         nextData.m_LotteryNumbers = null;
         nextData.m_hasBuy = false;
         nextData.m_HitLevel_Rand = -1;

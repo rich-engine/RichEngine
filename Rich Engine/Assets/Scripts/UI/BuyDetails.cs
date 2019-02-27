@@ -11,8 +11,9 @@ public class BuyDetails : MonoBehaviour
 	private Text txt_LotteryType;
 	private Text txt_KeepNunbers;
 	private Text txt_RandNumbers;
-	//private Button btn_KeepNumbers;
-	//private Button btn_RandNumbers;
+    //private Button btn_KeepNumbers;
+    //private Button btn_RandNumbers;
+    private Button btn_Buy;
 
     RichDataEntry m_richDataEntry;
 
@@ -23,9 +24,11 @@ public class BuyDetails : MonoBehaviour
         txt_RandNumbers = transform.Find("img_bg/txt_RandNumbers").GetComponent<Text>();
         //btn_KeepNumbers = transform.Find("img_bg/btn_KeepNumbers").GetComponent<Button>();
         //btn_RandNumbers = transform.Find("img_bg/btn_RandNumbers").GetComponent<Button>();
+        btn_Buy = transform.Find("img_bg/btn_Buy").GetComponent<Button>();
 
         //btn_KeepNumbers.onClick.AddListener(btnKeepClick);
         //btn_RandNumbers.onClick.AddListener(btnRandomClick);
+        btn_Buy.onClick.AddListener(btnBuyClick);
         transform.GetComponent<Button>().onClick.AddListener(btnCloseClick);
     }
 
@@ -41,6 +44,8 @@ public class BuyDetails : MonoBehaviour
             txt_RandNumbers.text = "";
         else
             txt_RandNumbers.text = UIController.Instance.IntConvertString(data.m_RandNumbers);
+
+        txt_LotteryType.text = "请帮我购买" + UIController.Instance.mLottryType;
     }
 
     //public void btnRandomClick()
@@ -52,6 +57,12 @@ public class BuyDetails : MonoBehaviour
     //{
     //    GameObject ui = UIController.Instance.CreateObject("UI/KeepUI", UIController.Instance.mCanvas);
     //}
+
+    public void btnBuyClick()
+    {
+        RichEngine.Instance.m_dataCenter.SetBuy(UIController.Instance.mLottryType, m_richDataEntry.m_Issue);
+        btnCloseClick();
+    }
 
     public void btnCloseClick()
     {

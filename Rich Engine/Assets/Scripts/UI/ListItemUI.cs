@@ -38,7 +38,7 @@ public class ListItemUI : MonoBehaviour
         btn_Keep = transform.Find("btn_Keep").GetComponent<Button>();
         btn_Random = transform.Find("btn_Random").GetComponent<Button>();
         tog_hasBuy = transform.Find("tog_hasBuy").GetComponent<Toggle>();
-        tog_hasBuy.onValueChanged.AddListener(ToggleClick);
+        //tog_hasBuy.onValueChanged.AddListener(ToggleClick);
         btn_Details.onClick.AddListener(btnDetailsClick);
         btn_Random.onClick.AddListener(btnRandomClick);
         btn_Keep.onClick.AddListener(btnKeepClick);
@@ -98,14 +98,14 @@ public class ListItemUI : MonoBehaviour
         if (m_richDataEntry.m_hasResult || m_richDataEntry.m_isExpired || m_richDataEntry.m_hasBuy)
         {
             tog_hasBuy.enabled = false;
-            btn_Details.enabled = false;
+            //btn_Details.enabled = false;
             btn_Random.enabled = false;
             btn_Keep.enabled = false;
         }
         else
         {
             tog_hasBuy.enabled = true;
-            btn_Details.enabled = true;
+            //btn_Details.enabled = true;
             btn_Random.enabled = true;
             btn_Keep.enabled = true;
         }
@@ -115,7 +115,7 @@ public class ListItemUI : MonoBehaviour
     private void ToggleClick(bool arg)
     {
         //if (arg)
-            RichEngine.Instance.m_dataCenter.SetBuy(UIController.Instance.mLottryType, m_richDataEntry.m_Issue);
+            //RichEngine.Instance.m_dataCenter.SetBuy(UIController.Instance.mLottryType, m_richDataEntry.m_Issue);
 
     }
 

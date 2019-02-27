@@ -55,10 +55,11 @@ public class ListScroll : MonoBehaviour
             items[mCount].SetActive(false);
             mCount--;
         }
-
+        //Debug.Log("dds " + items[0].transform.position);
+        //Debug.Log("dds9 " + items[9].transform.position);
         if (mRecord.m_RichList.Count > 10)
         {
-            if (items[0].transform.position.y <= 1660)//从上往下滑
+            if (items[0].transform.position.y <= 1585)//从上往下滑
             {
                 int index = items[0].GetComponent<ListItemUI>().m_index + 1;//首先判断是否为第一个元素，是的话就表示显示完了，不需要换位置了
                 if (index >= mRecord.m_RichList.Count)
@@ -77,7 +78,7 @@ public class ListScroll : MonoBehaviour
 
                 items[0].GetComponent<ListItemUI>().SetItemData(mRecord.m_RichList[index], index);
             }
-            if (items[0].transform.position.y >= 1860)//从下往上滑
+            if (items[0].transform.position.y >= -1230)//从下往上滑
             {
                 int index = items[items.Count - 1].GetComponent<ListItemUI>().m_index - 1;//首先判断是否为最后，是的话就表示显示完了，不需要换位置了
                 if (index < 0)
