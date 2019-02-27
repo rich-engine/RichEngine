@@ -56,7 +56,7 @@ public class KeepUI : MonoBehaviour
         int[] nums = rule.CheckNumsAvailable(mKeepNumbers);
         if (nums != null)
         {
-            UIController.Instance.mTextKeep.text = "守号号码：" + nums;
+            UIController.Instance.mTextKeep.text = "守号号码：" + UIController.Instance.IntConvertString(nums);
             RichEngine.Instance.m_dataCenter.SetKeepNumbers(UIController.Instance.mLottryType, nums);
             btnCloseClick();
         }           

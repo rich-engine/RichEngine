@@ -52,6 +52,13 @@ public class UIController : MonoBehaviour
         if (num == null)
             return "";
         string[] s_RandNumbers = Array.ConvertAll<int, string>(num, delegate (int input) { return input.ToString(); });
+        for (int i = 0; i < s_RandNumbers.Length; i++)
+        {
+            if (s_RandNumbers[i] != "" && int.Parse(s_RandNumbers[i]) < 10)
+            {
+                s_RandNumbers[i] = "0" + s_RandNumbers[i];
+            }
+        }
         string str = string.Join(strMark, s_RandNumbers);
         return str;
     }

@@ -134,10 +134,14 @@ public class SuperBigLotteryRule : ILotteryRule
 
     public int[] CheckNumsAvailable(int[] nums)
     {
-        int _beforeMaxNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[0].max;
-        int _afterMaxNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[1].max;
-        int _beforeMinNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[0].min;
-        int _afterMinNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[1].min;
+        //int _beforeMaxNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[0].max;
+        //int _afterMaxNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[1].max;
+        //int _beforeMinNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[0].min;
+        //int _afterMinNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[1].min;
+        int _beforeMaxNum = 35;
+        int _afterMaxNum = 12;
+        int _beforeMinNum = 1;
+        int _afterMinNum = 1;
 
 
         int[] _beforeLottery = new int[mBeforeNum];

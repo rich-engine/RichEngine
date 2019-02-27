@@ -121,11 +121,15 @@ public class DoubleColorBallRule : ILotteryRule
 
     public int[] CheckNumsAvailable(int[] nums)
     {
-        int _beforeMaxNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[0].max;
-        int _afterMaxNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[1].max;
-        int _beforeMinNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[0].min;
-        int _afterMinNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[1].min;
+        //int _beforeMaxNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[0].max;
+        //int _afterMaxNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[1].max;
+        //int _beforeMinNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[0].min;
+        //int _afterMinNum = RichEngine.Instance.m_setting.m_LottryTypes[GetLotteryType()].segments[1].min;
 
+        int _beforeMaxNum = 33;
+        int _afterMaxNum = 16;
+        int _beforeMinNum = 1;
+        int _afterMinNum = 1;
 
         int[] _beforeLottery = new int[mBeforeNum];
         int[] _afterLottery = new int[mNumCount - mBeforeNum];
@@ -161,7 +165,7 @@ public class DoubleColorBallRule : ILotteryRule
             return null;
 
         Array.Sort(_beforeLottery);
-        Array.Sort(_afterLottery);
+        //Array.Sort(_afterLottery);//这个不用排序了，肯定只有一个
 
         int[] sortNum = _beforeLottery.Concat(_afterLottery).ToArray();
 
