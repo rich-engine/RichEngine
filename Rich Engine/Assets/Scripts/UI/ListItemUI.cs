@@ -76,15 +76,10 @@ public class ListItemUI : MonoBehaviour
             }
             else
             {
-                if (m_richDataEntry.m_HitLevel_Rand == -1)
-                    txt_HitLevel_Rand.text = "未中奖";
-                else
-                    txt_HitLevel_Rand.text = m_richDataEntry.m_HitLevel_Rand + "等奖";
 
-                if (m_richDataEntry.m_HitLevel_Keep == -1)
-                    txt_HitLevel_Keep.text = "未中奖";
-                else
-                    txt_HitLevel_Keep.text = m_richDataEntry.m_HitLevel_Keep + "等奖";
+                txt_HitLevel_Rand.text = returnChinese(m_richDataEntry.m_HitLevel_Rand);
+                txt_HitLevel_Keep.text = returnChinese(m_richDataEntry.m_HitLevel_Keep);
+                    
             }
 
         }
@@ -134,5 +129,46 @@ public class ListItemUI : MonoBehaviour
     {
         GameObject ui = UIController.Instance.CreateObject("UI/KeepUI", UIController.Instance.mCanvas);
         ui.GetComponent<KeepUI>().SetItemData();
+    }
+
+    string returnChinese(int level)
+    {
+        string strLevel = "";
+        switch (level)
+        {
+            case -1:
+                strLevel = "未中奖";
+                break;
+            case 1:
+                strLevel = "一等奖";
+                break;
+            case 2:
+                strLevel = "二等奖";
+                break;
+            case 3:
+                strLevel = "三等奖";
+                break;
+            case 4:
+                strLevel = "四等奖";
+                break;
+            case 5:
+                strLevel = "五等奖";
+                break;
+            case 6:
+                strLevel = "六等奖";
+                break;
+            case 7:
+                strLevel = "七等奖";
+                break;
+            case 8:
+                strLevel = "八等奖";
+                break;
+            case 9:
+                strLevel = "九等奖";
+                break;
+            default:
+                break;
+        }
+        return strLevel;
     }
 }

@@ -108,7 +108,10 @@ public class KeepUI : MonoBehaviour
     public void setIndexToKeepNumbers(string num,int index)
     {
         if (mKeepNumbers == null)
+        {
             mKeepNumbers = new int[mTotalNum];
+            mKeepNumbers[index] = int.Parse(num);
+        }           
         else
             mKeepNumbers[index] = int.Parse(num);
     }

@@ -161,7 +161,7 @@ public class SuperBigLotteryRule : ILotteryRule
 
         for (int i = 0; i < _beforeLottery.Length; i++)
         {
-            if (_beforeLottery[i] < _beforeMinNum  ||_beforeLottery[i] > _beforeMaxNum)
+            if (_beforeLottery[i] < _beforeMinNum  || _beforeLottery[i] > _beforeMaxNum)
                 return null;
         }
 

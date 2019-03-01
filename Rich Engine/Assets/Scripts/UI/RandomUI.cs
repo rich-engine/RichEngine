@@ -12,6 +12,7 @@ public class RandomUI : MonoBehaviour
 	private Button btn_Sure;
 	private Button btn_Cancel;
 	private Button btn_Random;
+    private Button btn_Clear;
     RichDataEntry m_richDataEntry;
     public List<GameObject> items = new List<GameObject>();
     int mCount = 0;
@@ -24,10 +25,12 @@ public class RandomUI : MonoBehaviour
         btn_Sure = transform.Find("img_bg/btn_Sure").GetComponent<Button>();
         btn_Cancel = transform.Find("img_bg/btn_Cancel").GetComponent<Button>();
         btn_Random = transform.Find("img_bg/btn_Random").GetComponent<Button>();
+        btn_Clear = transform.Find("img_bg/btn_Clear").GetComponent<Button>();
 
         btn_Sure.onClick.AddListener(btnSureClick);
         btn_Cancel.onClick.AddListener(btnCloseClick);
         btn_Random.onClick.AddListener(btnRandClick);
+        btn_Clear.onClick.AddListener(btnClearClick);
         transform.GetComponent<Button>().onClick.AddListener(btnCloseClick);
     }
 
@@ -42,8 +45,8 @@ public class RandomUI : MonoBehaviour
 
     private void btnSureClick()
     {
-        if (randomNumbers == null)
-            return;
+        //if (randomNumbers == null)
+        //    return;
         RichEngine.Instance.m_dataCenter.SetRandNumbers(UIController.Instance.mLottryType, m_richDataEntry.m_Issue, randomNumbers, mRandomType);
         btnCloseClick();
     }
@@ -74,7 +77,7 @@ public class RandomUI : MonoBehaviour
                 }
 
                 items[index].SetActive(true);
-                items[index].GetComponent<RandomItemUI>().SetItemData(index, randomType,this);
+                items[index].GetComponent<RandomItemUI>().SetItemData(index, randomType, m_richDataEntry.m_RandAlgothm, this);
             }
             mCount = RandomFactory.GetRandomFuncList().Count;
         }
@@ -97,7 +100,7 @@ public class RandomUI : MonoBehaviour
 
                 items.RemoveAt(items.Count - 1);//将之前最后元素删除
 
-                items[0].GetComponent<RandomItemUI>().SetItemData(index, returnKey(index),this);
+                items[0].GetComponent<RandomItemUI>().SetItemData(index, returnKey(index), m_richDataEntry.m_RandAlgothm, this);
             }
             if (items[0].transform.position.x <= -100)//从右向左滑
             {
@@ -116,7 +119,7 @@ public class RandomUI : MonoBehaviour
 
                 items.RemoveAt(0);//将之前最前面的元素删除；
 
-                items[items.Count - 1].GetComponent<RandomItemUI>().SetItemData(index, returnKey(index),this);
+                items[items.Count - 1].GetComponent<RandomItemUI>().SetItemData(index, returnKey(index), m_richDataEntry.m_RandAlgothm, this);
             }
         }
     }
@@ -136,10 +139,35 @@ public class RandomUI : MonoBehaviour
         return key;
     }
 
-    public void setRandomText(string type)
+    public void setRandomText(string type,int num)
     {
         mRandomType = type;
         randomNumbers = RichEngine.Instance.GetRandNumbers(UIController.Instance.mLottryType, m_richDataEntry.m_Issue, type);
         txt_RandNumbers.text = UIController.Instance.IntConvertString(randomNumbers);
+        setMarkVisible(false, num);
+    }
+
+    public void btnClearClick()
+    {
+        txt_RandNumbers.text = "";
+        randomNumbers = null;
+        mRandomType = "";
+        setMarkVisible(false, -1);
+
+
+    }
+
+    public void setMarkVisible(bool isVisible,int num)
+    {
+        int index = -1;
+        foreach (var randomType in RandomFactory.GetRandomFuncList())
+        {
+            index++;
+            if (index >= 10 || num == index)
+            {
+                break;
+            }
+            items[index].GetComponent<RandomItemUI>().setMarkVisible(false);
+        }
     }
 }
