@@ -9,21 +9,30 @@ using System;
 public class KeepItemUI : MonoBehaviour
 {
 	public int m_index = -1;
-    int[] mKeepNumbers;
+    InputField mField;
+    KeepUI mKeepUI;
 
-    void Start()
+    void Awake()
 	{
-        GetComponent<InputField>().onValueChanged.AddListener(InputClick);
+        mField = GetComponent<InputField>();
+        mField.onValueChanged.AddListener(InputClick);
     }
 
-    public void SetItemData(int index,int[] num)
+    public void SetItemData(int index,string num, KeepUI keepUI)
     {
         m_index = index;
-        mKeepNumbers = num;
+        mKeepUI = keepUI;
+        SetItemText(num);
     }
 
     public void InputClick(string arg)
     {
-        mKeepNumbers[m_index] = int.Parse(arg);
+        if(arg !="")
+            mKeepUI.setIndexToKeepNumbers(arg,m_index);
+    }
+
+    public void SetItemText(string num)
+    {
+        mField.text = num;
     }
 }

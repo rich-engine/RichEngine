@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System;
 using System.Linq;
+using UnityEngine;
 
 
 public class DoubleColorBallRule : ILotteryRule
@@ -148,13 +149,14 @@ public class DoubleColorBallRule : ILotteryRule
 
         for (int i = 0; i < _beforeLottery.Length; i++)
         {
-            if (_beforeLottery[i] < _beforeMinNum && _beforeLottery[i] > _beforeMaxNum)
+            Debug.Log("i++" + _beforeLottery[i]);
+            if (_beforeLottery[i] < _beforeMinNum || _beforeLottery[i] > _beforeMaxNum)
                 return null;
         }
 
         for (int i = 0; i < _afterLottery.Length; i++)
         {
-            if (_afterLottery[i] < _afterMinNum && _afterLottery[i] > _afterMaxNum)
+            if (_afterLottery[i] < _afterMinNum || _afterLottery[i] > _afterMaxNum)
                 return null;
         }
 

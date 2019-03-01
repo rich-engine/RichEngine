@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 222976031328053424}
   - component: {fileID: 114554404223193992}
   m_Layer: 5
-  m_Name: Text
+  m_Name: txt_num
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,10 +112,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 20
     m_FontStyle: 2
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 3
     m_AlignByGeometry: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u8BF7\u8F93\u5165\u5B88\u53F7\u53F7\u7801\uFF0C\u4EE5,\u9694\u5F00"
+  m_Text: "\u6570\u5B57"
 --- !u!114 &114554404223193992
 MonoBehaviour:
   m_ObjectHideFlags: 1
