@@ -717,8 +717,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VERSION: 1.0
   DataSaveFileName: RichData.txt
-  UseQueryAPI: Faker
-  m_QueryInterval: 3
+  UseQueryAPI: http://www.opencai.net/
+  m_QueryInterval: 300
 --- !u!4 &236148941
 Transform:
   m_ObjectHideFlags: 0
