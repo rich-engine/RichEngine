@@ -71,6 +71,10 @@ public class SuperBigLotteryRule : ILotteryRule
 
     private int Winning(int[] compareNumber, int[] lotteryNumbers)
     {
+        if (compareNumber == null)
+        {
+            return -1;
+        }
         int[] _beforeCompare = new int[mBeforeNum];
         int[] _afterCompare = new int[mNumCount - mBeforeNum];
         int[] _beforeLottery = new int[mBeforeNum];
