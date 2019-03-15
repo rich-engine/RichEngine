@@ -11,6 +11,7 @@ public class ListScroll : MonoBehaviour
     private int mCount = 0;
     private string mLottryType = "";
     RichLotteryRecord mRecord;
+    float mItemHeight = 350;
 
     
 
@@ -37,7 +38,7 @@ public class ListScroll : MonoBehaviour
         {
             //根据item数量改变滚动区域的大小
             int count = mRecord.m_RichList.Count;
-            transform.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 200 * count);
+            transform.GetComponent<RectTransform>().sizeDelta = new Vector2(0, mItemHeight * count);
             for (int i = count - 1; i >= 0; i--)
             {
                 if (count - i > 10 || count - i < 0)
@@ -72,7 +73,7 @@ public class ListScroll : MonoBehaviour
 
                 items.Insert(0, items[9]);//将最后的元素移动到最前面
 
-                items[0].transform.localPosition = new Vector3(pos.x, pos.y + 200, pos.z);//重新设置移动位置之后第一个元素的位置
+                items[0].transform.localPosition = new Vector3(pos.x, pos.y + mItemHeight, pos.z);//重新设置移动位置之后第一个元素的位置
 
                 items.RemoveAt(items.Count - 1);//将之前最后元素删除
 
@@ -90,7 +91,7 @@ public class ListScroll : MonoBehaviour
 
                 items.Add(items[0]);//将最前的元素移动到最后面
 
-                items[items.Count - 1].transform.localPosition = new Vector3(pos.x, pos.y - 200, pos.z);//重新设置移动位置之后最后一个元素的位置
+                items[items.Count - 1].transform.localPosition = new Vector3(pos.x, pos.y - mItemHeight, pos.z);//重新设置移动位置之后最后一个元素的位置
 
                 items.RemoveAt(0);//将之前最前面的元素删除；
 
