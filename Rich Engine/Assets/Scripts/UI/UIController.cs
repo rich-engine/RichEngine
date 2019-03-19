@@ -95,5 +95,13 @@ public class UIController : MonoBehaviour
         return false;
     }
 
+    public GameObject setTip(string str, float time = 2)
+    {
+        GameObject uiObject = CreateObject("UI/Tip", UIController.Instance.mCanvas);
+        uiObject.GetComponent<Tip>().setTip(str, time);
+        //返回节点已供需要自己控制关闭的需求
+        return uiObject; 
+    }
+
 }
 

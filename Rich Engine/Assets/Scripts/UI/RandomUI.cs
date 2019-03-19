@@ -165,7 +165,7 @@ public class RandomUI : MonoBehaviour
             index++;
             if (index >= 10 || num == index)
             {
-                break;
+                continue;
             }
             items[index].GetComponent<RandomItemUI>().setMarkVisible(false);
         }

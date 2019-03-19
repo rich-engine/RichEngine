@@ -84,8 +84,7 @@ public class KeepUI : MonoBehaviour
         }           
         else
         {
-            GameObject uiObject = UIController.Instance.CreateObject("UI/Tip", UIController.Instance.mCanvas);
-            uiObject.GetComponent<Tip>().setTip("输入号码规则不对", 3);
+            UIController.Instance.setTip("输入号码规则不对", 3);
         }
             
     }

@@ -88,8 +88,7 @@ public class RichEngine : MonoBehaviour {
                 mLeftTime = 2.0f;
 
                 //弹出Tip
-                GameObject uiObject = UIController.Instance.CreateObject("UI/Tip", UIController.Instance.mCanvas);
-                uiObject.GetComponent<Tip>().setTip("再次点击返回退出APP", 2);
+                UIController.Instance.setTip("再次点击返回退出APP", 2);
             }
         }
 
