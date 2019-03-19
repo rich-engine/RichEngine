@@ -9,8 +9,9 @@ public class TitleListScroll : MonoBehaviour
 {
     public List<GameObject> items = new List<GameObject>();
     private int mCount = 0;
+    int mItemCount = 10;
 
- 
+
     void Start()
     {
         mCount = 0;
@@ -40,7 +41,7 @@ public class TitleListScroll : MonoBehaviour
             mCount = RichEngine.Instance.m_setting.m_LottryTypes.Count;
         }
 
-        if (RichEngine.Instance.m_setting.m_LottryTypes.Count > 10)
+        if (RichEngine.Instance.m_setting.m_LottryTypes.Count > mItemCount)
         {
             if (items[0].transform.position.x >= 100)//从左向右滑
             {

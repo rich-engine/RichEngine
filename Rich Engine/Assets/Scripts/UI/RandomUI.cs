@@ -18,6 +18,7 @@ public class RandomUI : MonoBehaviour
     int mCount = 0;
     int[] randomNumbers;
     string mRandomType;
+    int mItemCount = 10;
 
     void Awake()
 	{
@@ -71,7 +72,7 @@ public class RandomUI : MonoBehaviour
             foreach (var randomType in RandomFactory.GetRandomFuncList())
             {
                 index++;
-                if (index >= 10)
+                if (index >= mItemCount)
                 {
                     break;
                 }
@@ -82,7 +83,7 @@ public class RandomUI : MonoBehaviour
             mCount = RandomFactory.GetRandomFuncList().Count;
         }
 
-        if (RandomFactory.GetRandomFuncList().Count > 10)
+        if (RandomFactory.GetRandomFuncList().Count > mItemCount)
         {
             if (items[0].transform.position.x >= 100)//从左向右滑
             {
@@ -163,7 +164,7 @@ public class RandomUI : MonoBehaviour
         foreach (var randomType in RandomFactory.GetRandomFuncList())
         {
             index++;
-            if (index >= 10 || num == index)
+            if (index >= mItemCount || num == index)
             {
                 continue;
             }

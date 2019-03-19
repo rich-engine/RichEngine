@@ -12,6 +12,7 @@ public class ListScroll : MonoBehaviour
     private string mLottryType = "";
     RichLotteryRecord mRecord;
     float mItemHeight = 350;
+    int mItemCount = 10;
 
     
 
@@ -28,6 +29,7 @@ public class ListScroll : MonoBehaviour
 
         if (mLottryType != UIController.Instance.mLottryType)
         {
+            mCount = 0;
             mLottryType = UIController.Instance.mLottryType;
             mRecord = RichEngine.Instance.m_dataCenter.GetRecordOf(UIController.Instance.mLottryType);
             setRecord();
@@ -50,15 +52,22 @@ public class ListScroll : MonoBehaviour
             }
 
             mCount = count;
+
+            if (mCount <= mItemCount)
+            {
+                for (int i = mCount; i < mItemCount; i++)
+                {
+                    items[i].SetActive(false);
+                }
+
+            }
+
+
         }
-        else
-        {
-            items[mCount].SetActive(false);
-            mCount--;
-        }
+       
         //Debug.Log("dds " + items[0].transform.position);
         //Debug.Log("dds9 " + items[9].transform.position);
-        if (mRecord.m_RichList.Count > 10)
+        if (mRecord.m_RichList.Count > mItemCount)
         {
             if (items[0].transform.position.y <= 1585)//从上往下滑
             {
