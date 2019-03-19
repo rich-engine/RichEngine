@@ -31,7 +31,7 @@ public class CarrionTenMillionRandom : IRandom {
     //中间变量
     Byte m_seed;
     System.Random m_rnd;
-
+    
     public void SetRandomSeed(RichDataEntry seed)
     {
         TimeSpan deltaT = seed.m_Date - DateTime.Now;
@@ -57,6 +57,8 @@ public class CarrionTenMillionRandom : IRandom {
         m_seed = (byte)(m & t);
 
         m_rnd = new System.Random(m_seed);
+
+
     }
 
     public int[] GetRandNum(int max, int min, int num)
@@ -68,7 +70,7 @@ public class CarrionTenMillionRandom : IRandom {
 
             int randomNum;
             randomNum = m_rnd.Next(min, max);
-
+            
             while (Array.IndexOf(result, randomNum) != -1)
             {
                 randomNum = m_rnd.Next(min, max);

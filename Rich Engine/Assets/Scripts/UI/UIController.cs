@@ -33,7 +33,7 @@ public class UIController : MonoBehaviour
             GameObject mObject = GameObject.Instantiate(o) as GameObject;
             if (mObject != null)
             {
-                mObject.transform.parent = parentObj.transform;
+                mObject.transform.SetParent(parentObj.transform);
                 mObject.transform.localPosition = new Vector3(0, 0, 0);
                 mObject.transform.localScale = new Vector3(1, 1, 1);
                 return mObject;

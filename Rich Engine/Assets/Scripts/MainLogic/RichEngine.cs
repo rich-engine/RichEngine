@@ -60,6 +60,43 @@ public class RichEngine : MonoBehaviour {
         m_dataCenter.SaveData();
     }
 
+    bool mClickOnce = false;
+    float mLeftTime = 0f;
+    void Update()
+    {
+        //双击返回退出   
+
+        mLeftTime -= Time.deltaTime;
+        if(mLeftTime < 0f && mClickOnce)
+        {
+            mClickOnce = false;
+            mLeftTime = 0;
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (mClickOnce)
+            {
+
+                Application.Quit();
+
+            }
+            else
+            {
+                mClickOnce = true;
+                mLeftTime = 2.0f;
+
+                //弹出Tip
+                GameObject uiObject = UIController.Instance.CreateObject("UI/Tip", UIController.Instance.mCanvas);
+                uiObject.GetComponent<Tip>().setTip("再次点击返回退出APP", 2);
+            }
+        }
+
+
+    }
+
+
     //单条查询
     public void Query(string lotteryType)
     {
