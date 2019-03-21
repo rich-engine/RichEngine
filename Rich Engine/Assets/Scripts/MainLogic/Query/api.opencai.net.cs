@@ -65,10 +65,12 @@ public class Query_To_OpenCai :  ILotteryResultQuery
 
     Dictionary<ulong, JsonData> m_resultEntryMap;
     ulong m_lastedIssue;
+    string m_curType;
     public bool GetData(string lotteryType)
     {
         try
         {
+            m_curType = lotteryType;
             string url = RichEngine.Instance.GetLotteryQueryLink(lotteryType, GetApiType());
 
             string html = api.HttpGet(url, Encoding.UTF8);
@@ -128,6 +130,10 @@ public class Query_To_OpenCai :  ILotteryResultQuery
 
         //entry.m_Date = JsonMapper.ToObject<DateTime>(result["opentime"].ToJson());
         entry.m_Date = DateTime.Parse(result["opentime"].ToString());
+
+
+        ILotteryRule rule = LotteryRuleFactory.GetLotteryRule(m_curType);
+        rule.Compare(entry);
 
         entry.m_hasResult = true;
 
