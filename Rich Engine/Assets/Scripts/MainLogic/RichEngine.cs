@@ -36,6 +36,18 @@ public class RichEngine : MonoBehaviour {
 
         m_timeCount = 0;    //保证第一次的query
 
+        //修复错误
+        foreach (var record in m_data.m_RecordsList)
+        {
+            ILotteryRule rule = LotteryRuleFactory.GetLotteryRule(record.m_LotteryType);
+
+            foreach (var entry in record.m_RichList)
+            {
+                rule.Compare(entry);
+            }
+        }
+
+
     }
 
 
