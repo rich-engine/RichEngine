@@ -71,7 +71,7 @@ public class SuperBigLotteryRule : ILotteryRule
 
     private int Winning(int[] compareNumber, int[] lotteryNumbers)
     {
-        if (compareNumber == null)
+        if (compareNumber == null || lotteryNumbers == null)
         {
             return -1;
         }

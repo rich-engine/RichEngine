@@ -47,8 +47,13 @@ public class ListScroll : MonoBehaviour
                 {
                     break;
                 }
+                
                 items[count - i - 1].SetActive(true);
                 items[count - i - 1].GetComponent<ListItemUI>().SetItemData(mRecord.m_RichList[i], i);
+
+                //items[count - i - 1].transform.position = new Vector3(540, 1585 - mItemHeight * (count - i - 1), 0);
+                items[count - i - 1].transform.localPosition = new Vector3(0, -175 - mItemHeight * (count - i - 1), 0);
+                Debug.Log("dds0 " + items[count - i - 1].name + items[count - i - 1].transform.localPosition);
             }
 
             mCount = count;
@@ -63,11 +68,11 @@ public class ListScroll : MonoBehaviour
         }
 
 
-        //Debug.Log("dds0 " + items[0].transform.position);
-        //Debug.Log("dds0 localPosition" + items[0].transform.localPosition);
-        //Debug.Log("dds1 " + items[1].transform.position);
+        //Debug.Log("dds0 "+ items[0].name + items[0].transform.position);
+        Debug.Log("dds0 localPosition" + items[0].transform.localPosition);
+        //Debug.Log("dds1 "+ items[1].name + items[1].transform.position);
         //Debug.Log("dds1 localPosition" + items[1].transform.localPosition);
-        //Debug.Log("dds9 " + items[9].transform.position);
+        //Debug.Log("dds9 "+ items[9].name + items[9].transform.position);
         //Debug.Log("dds9 localPosition" + items[9].transform.localPosition);
         if (mRecord.m_RichList.Count > mItemCount)
         {
