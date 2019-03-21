@@ -63,7 +63,7 @@ public class RandomUI : MonoBehaviour
     void Update()
     {
         
-        if (mCount <= RandomFactory.GetRandomFuncList().Count)
+        if (mCount < RandomFactory.GetRandomFuncList().Count)
         {
             //根据item数量改变滚动区域的大小
             transform.GetComponent<RectTransform>().sizeDelta = new Vector2(200 * RichEngine.Instance.m_setting.m_LottryTypes.Count, 0);

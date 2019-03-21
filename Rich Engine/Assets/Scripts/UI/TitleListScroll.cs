@@ -19,7 +19,7 @@ public class TitleListScroll : MonoBehaviour
 
     void Update()
     {
-        if (mCount <= RichEngine.Instance.m_setting.m_LottryTypes.Count)
+        if (mCount < RichEngine.Instance.m_setting.m_LottryTypes.Count)
         {
             //根据item数量改变滚动区域的大小
             transform.GetComponent<RectTransform>().sizeDelta = new Vector2(200 * RichEngine.Instance.m_setting.m_LottryTypes.Count, 0);

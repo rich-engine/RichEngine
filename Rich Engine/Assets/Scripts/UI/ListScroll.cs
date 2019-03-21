@@ -36,7 +36,7 @@ public class ListScroll : MonoBehaviour
             UIController.Instance.mTextKeep.text = "守号号码：" + UIController.Instance.IntConvertString(mRecord.m_KeepNumbers);
         }
 
-        if (mCount <= mRecord.m_RichList.Count)
+        if (mCount < mRecord.m_RichList.Count)
         {
             //根据item数量改变滚动区域的大小
             int count = mRecord.m_RichList.Count;
@@ -52,7 +52,6 @@ public class ListScroll : MonoBehaviour
             }
 
             mCount = count;
-
             if (mCount <= mItemCount)
             {
                 for (int i = mCount; i < mItemCount; i++)
@@ -61,15 +60,18 @@ public class ListScroll : MonoBehaviour
                 }
 
             }
-
-
         }
-       
-        //Debug.Log("dds " + items[0].transform.position);
+
+
+        //Debug.Log("dds0 " + items[0].transform.position);
+        //Debug.Log("dds0 localPosition" + items[0].transform.localPosition);
+        //Debug.Log("dds1 " + items[1].transform.position);
+        //Debug.Log("dds1 localPosition" + items[1].transform.localPosition);
         //Debug.Log("dds9 " + items[9].transform.position);
+        //Debug.Log("dds9 localPosition" + items[9].transform.localPosition);
         if (mRecord.m_RichList.Count > mItemCount)
         {
-            if (items[0].transform.position.y <= 1585)//从上往下滑
+            if (items[0].transform.position.y <= 1583)//从上往下滑
             {
                 int index = items[0].GetComponent<ListItemUI>().m_index + 1;//首先判断是否为第一个元素，是的话就表示显示完了，不需要换位置了
                 if (index >= mRecord.m_RichList.Count)
@@ -88,7 +90,7 @@ public class ListScroll : MonoBehaviour
 
                 items[0].GetComponent<ListItemUI>().SetItemData(mRecord.m_RichList[index], index);
             }
-            if (items[0].transform.position.y >= -1230)//从下往上滑
+            if (items[0].transform.position.y > 1935)//从下往上滑
             {
                 int index = items[items.Count - 1].GetComponent<ListItemUI>().m_index - 1;//首先判断是否为最后，是的话就表示显示完了，不需要换位置了
                 if (index < 0)
