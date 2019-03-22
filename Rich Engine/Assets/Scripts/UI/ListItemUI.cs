@@ -50,20 +50,15 @@ public class ListItemUI : MonoBehaviour
         m_index = index;
         txt_Issue.text = "第" + m_richDataEntry.m_Issue.ToString() + "期";
         txt_Data.text = m_richDataEntry.m_Date.ToString() + "开奖";
-        if (m_richDataEntry.m_KeepNumbers == null)
-            txt_KeepNunbers.text = "";
-        else
-            txt_KeepNunbers.text = UIController.Instance.IntConvertString(m_richDataEntry.m_KeepNumbers);
+        refreshKeepText();
+        refreshRandomText();
 
         if (m_richDataEntry.m_LotteryNumbers == null)
             txt_LotteryNumbers.text = "";
         else
             txt_LotteryNumbers.text = UIController.Instance.IntConvertString(m_richDataEntry.m_LotteryNumbers);
 
-        if (m_richDataEntry.m_RandNumbers == null)
-            txt_RandNumbers.text = "";
-        else
-            txt_RandNumbers.text = UIController.Instance.IntConvertString(m_richDataEntry.m_RandNumbers);
+       
 
         tog_hasBuy.isOn = m_richDataEntry.m_hasBuy;
 
@@ -123,12 +118,12 @@ public class ListItemUI : MonoBehaviour
     public void btnRandomClick()
     {
         GameObject ui = UIController.Instance.CreateObject("UI/RandomUI", UIController.Instance.mCanvas);
-        ui.GetComponent<RandomUI>().SetItemData(m_richDataEntry);
+        ui.GetComponent<RandomUI>().SetItemData(m_richDataEntry,this);
     }
     public void btnKeepClick()
     {
         GameObject ui = UIController.Instance.CreateObject("UI/KeepUI", UIController.Instance.mCanvas);
-        ui.GetComponent<KeepUI>().SetItemData();
+        ui.GetComponent<KeepUI>().SetItemData(this);
     }
 
     string returnChinese(int level)
@@ -170,5 +165,21 @@ public class ListItemUI : MonoBehaviour
                 break;
         }
         return strLevel;
+    }
+
+    public void refreshKeepText()
+    {
+        if (m_richDataEntry.m_KeepNumbers == null)
+            txt_KeepNunbers.text = "";
+        else
+            txt_KeepNunbers.text = UIController.Instance.IntConvertString(m_richDataEntry.m_KeepNumbers);
+    }
+
+    public void refreshRandomText()
+    {
+        if (m_richDataEntry.m_RandNumbers == null)
+            txt_RandNumbers.text = "";
+        else
+            txt_RandNumbers.text = UIController.Instance.IntConvertString(m_richDataEntry.m_RandNumbers);
     }
 }

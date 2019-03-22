@@ -13,8 +13,10 @@ public class KeepUI : MonoBehaviour
 	private Image img_bg;
     int[] mKeepNumbers;
     int mTotalNum;
+    ListItemUI mListItemUI;
 
-	void Awake()
+
+    void Awake()
 	{
         btn_Sure = transform.Find("img_bg/btn_Sure").GetComponent<Button>();
         btn_Cancel = transform.Find("img_bg/btn_Cancel").GetComponent<Button>();
@@ -31,8 +33,9 @@ public class KeepUI : MonoBehaviour
 
     }
 
-    public void SetItemData()
+    public void SetItemData(ListItemUI listItemUI)
     {
+        mListItemUI = listItemUI;
         mTotalNum = RichEngine.Instance.m_setting.m_LottryTypes[UIController.Instance.mLottryType].totalNum;
         mKeepNumbers = RichEngine.Instance.m_dataCenter.GetRecordOf(UIController.Instance.mLottryType).m_KeepNumbers;
         string num = "";
@@ -71,6 +74,7 @@ public class KeepUI : MonoBehaviour
         {
             UIController.Instance.mTextKeep.text = "守号号码：";
             RichEngine.Instance.m_dataCenter.SetKeepNumbers(UIController.Instance.mLottryType, mKeepNumbers);
+            mListItemUI.refreshKeepText();
             btnCloseClick();
             return;
         }
@@ -80,6 +84,7 @@ public class KeepUI : MonoBehaviour
         {
             UIController.Instance.mTextKeep.text = "守号号码：" + UIController.Instance.IntConvertString(nums);
             RichEngine.Instance.m_dataCenter.SetKeepNumbers(UIController.Instance.mLottryType, nums);
+            mListItemUI.refreshKeepText();
             btnCloseClick();
         }           
         else

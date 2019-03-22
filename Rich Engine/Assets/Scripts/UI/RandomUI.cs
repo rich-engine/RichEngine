@@ -19,6 +19,7 @@ public class RandomUI : MonoBehaviour
     int[] randomNumbers;
     string mRandomType;
     int mItemCount = 10;
+    ListItemUI mListItemUI;
 
     void Awake()
 	{
@@ -35,9 +36,10 @@ public class RandomUI : MonoBehaviour
         transform.GetComponent<Button>().onClick.AddListener(btnCloseClick);
     }
 
-    public void SetItemData(RichDataEntry data)
+    public void SetItemData(RichDataEntry data,ListItemUI listItem)
     {
         m_richDataEntry = data;
+        mListItemUI = listItem;
         if (data.m_RandNumbers == null)
             txt_RandNumbers.text = "";
         else
@@ -49,6 +51,7 @@ public class RandomUI : MonoBehaviour
         //if (randomNumbers == null)
         //    return;
         RichEngine.Instance.m_dataCenter.SetRandNumbers(UIController.Instance.mLottryType, m_richDataEntry.m_Issue, randomNumbers, mRandomType);
+        mListItemUI.refreshRandomText();
         btnCloseClick();
     }
 
