@@ -14,6 +14,7 @@ public class BuyDetails : MonoBehaviour
     //private Button btn_KeepNumbers;
     //private Button btn_RandNumbers;
     private Button btn_Buy;
+    ListItemUI mListItemUI;
 
     RichDataEntry m_richDataEntry;
 
@@ -32,9 +33,10 @@ public class BuyDetails : MonoBehaviour
         transform.GetComponent<Button>().onClick.AddListener(btnCloseClick);
     }
 
-    public void SetItemData(RichDataEntry data)
+    public void SetItemData(RichDataEntry data, ListItemUI listItem)
     {
         m_richDataEntry = data;
+        mListItemUI = listItem;
         if (data.m_KeepNumbers == null)
             txt_KeepNunbers.text = "";
         else
@@ -61,6 +63,7 @@ public class BuyDetails : MonoBehaviour
     public void btnBuyClick()
     {
         RichEngine.Instance.m_dataCenter.SetBuy(UIController.Instance.mLottryType, m_richDataEntry.m_Issue);
+        mListItemUI.refreshBuy();
         btnCloseClick();
     }
 

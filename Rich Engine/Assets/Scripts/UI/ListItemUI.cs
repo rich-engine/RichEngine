@@ -42,6 +42,7 @@ public class ListItemUI : MonoBehaviour
         btn_Details.onClick.AddListener(btnDetailsClick);
         btn_Random.onClick.AddListener(btnRandomClick);
         btn_Keep.onClick.AddListener(btnKeepClick);
+        tog_hasBuy.enabled = false;
     }
 
     public void SetItemData(RichDataEntry data, int index)
@@ -52,15 +53,12 @@ public class ListItemUI : MonoBehaviour
         txt_Data.text = m_richDataEntry.m_Date.ToString() + "开奖";
         refreshKeepText();
         refreshRandomText();
+        refreshBuy();
 
         if (m_richDataEntry.m_LotteryNumbers == null)
             txt_LotteryNumbers.text = "";
         else
             txt_LotteryNumbers.text = UIController.Instance.IntConvertString(m_richDataEntry.m_LotteryNumbers);
-
-       
-
-        tog_hasBuy.isOn = m_richDataEntry.m_hasBuy;
 
         if (m_richDataEntry.m_hasBuy)
         {
@@ -76,26 +74,21 @@ public class ListItemUI : MonoBehaviour
                 txt_HitLevel_Keep.text = returnChinese(m_richDataEntry.m_HitLevel_Keep);
                     
             }
-
         }
         else
         {
             txt_HitLevel_Rand.text = "未购买";
             txt_HitLevel_Keep.text = "未购买";
-            tog_hasBuy.enabled = true;
         }
 
         if (m_richDataEntry.m_hasResult || m_richDataEntry.m_isExpired || m_richDataEntry.m_hasBuy)
         {
-            tog_hasBuy.enabled = false;
-            //btn_Details.enabled = false;
+            
             btn_Random.enabled = false;
             btn_Keep.enabled = false;
         }
         else
         {
-            tog_hasBuy.enabled = true;
-            //btn_Details.enabled = true;
             btn_Random.enabled = true;
             btn_Keep.enabled = true;
         }
@@ -112,7 +105,7 @@ public class ListItemUI : MonoBehaviour
     public void btnDetailsClick()
     {
        GameObject ui = UIController.Instance.CreateObject("UI/BuyDetails", UIController.Instance.mCanvas);
-        ui.GetComponent<BuyDetails>().SetItemData(m_richDataEntry);
+        ui.GetComponent<BuyDetails>().SetItemData(m_richDataEntry,this);
     }
 
     public void btnRandomClick()
@@ -181,5 +174,10 @@ public class ListItemUI : MonoBehaviour
             txt_RandNumbers.text = "";
         else
             txt_RandNumbers.text = UIController.Instance.IntConvertString(m_richDataEntry.m_RandNumbers);
+    }
+
+    public void refreshBuy()
+    {
+        tog_hasBuy.isOn = m_richDataEntry.m_hasBuy;
     }
 }

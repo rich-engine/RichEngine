@@ -37,6 +37,9 @@ public class ListScroll : MonoBehaviour
             UIController.Instance.mTextKeep.text = "守号号码：" + UIController.Instance.IntConvertString(mRecord.m_KeepNumbers);
         }
 
+        if (mRecord == null)
+            return;
+
         if (mCount < mRecord.m_RichList.Count)
         {
             //根据item数量改变滚动区域的大小
